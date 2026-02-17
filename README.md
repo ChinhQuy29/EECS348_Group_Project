@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ChinhQuy29/EECS348_Group_Project">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <!--<img src="images/logo.png" alt="Logo" width="80" height="80"> -->
   </a>
 
 <h3 align="center">Calculatorz</h3>
