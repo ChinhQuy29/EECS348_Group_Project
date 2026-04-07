@@ -99,26 +99,52 @@ The project is able to interpret and tokenize a given input from the user to par
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Under Construction
+### Download the Latest Build
+1. Head over to the [**Releases**](../../releases) page
+2. Under the latest release, expand the **Assets** section
+3. Download the binary for your platform:
+   - `arithmetic-evaluator-windows.exe` — Windows
+   - `arithmetic-evaluator-macos` — macOS
+4. Run the executable from your terminal or command prompt
+
+> **Note:** On macOS, you may need to make the binary executable first:
+> ```bash
+> chmod +x arithmetic-evaluator-macos
+> ```
+
+---
+
+### Building from Source
+
+If you'd prefer to compile it yourself, see the [Building from Source](#building-from-source) section below.
+
+---
+
+## Building from Source
 
 ### Prerequisites
+- C++17 or later
+- A C++ compiler (GCC, Clang, or MSVC)
 
-Under Construction
+### Steps
+```bash
+git clone https://github.com/ChinhQuy29/EECS348_Group_Project.git
+cd your-repo
 
-### Installation
+****
+NEEDS WORK
+****
 
-Under Construction
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
 
-
-
-<!-- USAGE EXAMPLES -->
 ## Usage
+```bash
+./arithmetic-evaluator "3 + (4 * 2)"
+```
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+---
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,7 +156,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] User Interface Module
 - [ ] Tokenizer
 - [ ] Prioritzation Module
+- [ ] Radomization Module
 - [ ] Evaluation Module
+- [ ] Error Handler
 
 See the [open issues](https://github.com/ChinhQuy29/EECS348_Group_Project/issues) for a full list of proposed features (and known issues).
 
