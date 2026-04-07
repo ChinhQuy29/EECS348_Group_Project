@@ -91,7 +91,7 @@ The project is able to interpret and tokenize a given input from the user to par
 
 ### Built With
 * [![C++] [C++] [C++-url]] 
-* [![Godot Engine] [Godot] [Godot-url]]
+* [![QT] [QT] [QT-url]]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -254,5 +254,5 @@ Project Link: [https://github.com/ChinhQuy29/EECS348_Group_Project](https://gith
 [JQuery-url]: https://jquery.com
 [C++]:https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white
 [C++-url]: https://cplusplus.com
-[Godot Engine]: https://img.shields.io/badge/Godot-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine
-[Godot-url]: https://godotengine.org
+[Qt]: https://img.shields.io/badge/Qt-%23217346.svg?style=for-the-badge&logo=qt
+[Qt-url]: https://www.qt.io
