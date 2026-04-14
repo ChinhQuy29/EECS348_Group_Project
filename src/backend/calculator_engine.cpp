@@ -1,8 +1,8 @@
-#include "../include/calculator_engine.h"
+#include "../../include/calculator_engine.hpp"
 
-#include "../include/tokenizer.h"
-#include "../include/parser.h"
-#include "../include/evaluator.h"
+#include "../../include/tokenizer.hpp"
+#include "../../include/parser.hpp"
+#include "../../include/evaluator.hpp"
 
 double CalculatorEngine::evaluate(const std::string& expression) const {
     Tokenizer tokenizer;
