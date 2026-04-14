@@ -15,24 +15,70 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             continue;
         }
 
-        if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
+        // Detect unary minus
+        if (c == '-') {
+            bool unaryMinus = false;
+
+            if (tokens.empty()) {
+                unaryMinus = true;
+            } else {
+                TokenType prev = tokens.back().type;
+
+                if (prev == TokenType::Plus ||
+                    prev == TokenType::Minus ||
+                    prev == TokenType::Multiply ||
+                    prev == TokenType::Divide ||
+                    prev == TokenType::LeftParen) {
+                    unaryMinus = true;
+                }
+            }
+
+            if (unaryMinus) {
+                std::string number = "-";
+                ++i;
+
+                if (i >= expression.size() ||
+                    (!std::isdigit(expression[i]) && expression[i] != '.')) {
+                    throw std::runtime_error("Invalid negative number");
+                }
+
+                bool hasDecimalPoint = false;
+
+                while (i < expression.size() &&
+                       (std::isdigit(expression[i]) || expression[i] == '.')) {
+
+                    if (expression[i] == '.') {
+                        if (hasDecimalPoint) {
+                            throw std::runtime_error("Invalid number format");
+                        }
+                        hasDecimalPoint = true;
+                    }
+
+                    number += expression[i];
+                    ++i;
+                }
+
+                tokens.push_back({TokenType::Number, number});
+                continue;
+            }
+        }
+
+        if (std::isdigit(c) || c == '.') {
             std::string number;
             bool hasDecimalPoint = false;
 
             while (i < expression.size() &&
-                   (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
+                   (std::isdigit(expression[i]) || expression[i] == '.')) {
+
                 if (expression[i] == '.') {
                     if (hasDecimalPoint) {
-                        throw std::runtime_error("Invalid number: multiple decimal points");
+                        throw std::runtime_error("Invalid number format");
                     }
                     hasDecimalPoint = true;
                 }
+
                 number += expression[i];
                 ++i;
-            }
-
-            if (number == ".") {
-                throw std::runtime_error("Invalid number: '.'");
             }
 
             tokens.push_back({TokenType::Number, number});
