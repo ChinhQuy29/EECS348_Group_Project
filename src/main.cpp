@@ -1,15 +1,25 @@
 #include <iostream>
+#include <string>
+
 #include "../include/calculator_engine.hpp"
+#include "../include/error_handler.hpp"
 
 int main() {
     CalculatorEngine engine;
+    std::string expression;
+
+    std::cout << "Enter expression: ";
+    std::getline(std::cin, expression);
 
     try {
-        std::cout << engine.evaluate("3 + 4 * 2") << '\n';
-        std::cout << engine.evaluate("(1 + 2) * 5") << '\n';
-        std::cout << engine.evaluate("((2 + 3) * (4 + (5 * 6)))") << '\n';
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << '\n';
+        double result = engine.evaluate(expression);
+        std::cout << "Result: " << result << '\n';
+    }
+    catch (const CalculatorException& e) {
+        std::cout << e.what() << '\n';
+    }
+    catch (const std::exception& e) {
+        std::cout << "Unexpected error: " << e.what() << '\n';
     }
 
     return 0;

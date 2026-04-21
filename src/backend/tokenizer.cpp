@@ -1,7 +1,7 @@
 #include "../../include/tokenizer.hpp"
+#include "../../include/error_handler.hpp"
 
 #include <cctype>
-#include <stdexcept>
 
 std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
     std::vector<Token> tokens;
@@ -15,7 +15,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             continue;
         }
 
-        // Detect unary minus
+        // Handle unary minus for negative numbers
         if (c == '-') {
             bool unaryMinus = false;
 
@@ -38,18 +38,25 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 ++i;
 
                 if (i >= expression.size() ||
-                    (!std::isdigit(expression[i]) && expression[i] != '.')) {
-                    throw std::runtime_error("Invalid negative number");
+                    (!std::isdigit(static_cast<unsigned char>(expression[i])) && expression[i] != '.')) {
+                    throw CalculatorException(
+                        ErrorType::InvalidNumber,
+                        "expected digits after unary minus",
+                        i + 1
+                    );
                 }
 
                 bool hasDecimalPoint = false;
 
                 while (i < expression.size() &&
-                       (std::isdigit(expression[i]) || expression[i] == '.')) {
-
+                       (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
                     if (expression[i] == '.') {
                         if (hasDecimalPoint) {
-                            throw std::runtime_error("Invalid number format");
+                            throw CalculatorException(
+                                ErrorType::InvalidNumber,
+                                "multiple decimal points in number",
+                                i + 1
+                            );
                         }
                         hasDecimalPoint = true;
                     }
@@ -58,27 +65,48 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                     ++i;
                 }
 
+                if (number == "-.") {
+                    throw CalculatorException(
+                        ErrorType::InvalidNumber,
+                        "invalid negative decimal number",
+                        i
+                    );
+                }
+
                 tokens.push_back({TokenType::Number, number});
                 continue;
             }
         }
 
-        if (std::isdigit(c) || c == '.') {
+        // Handle normal numbers
+        if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
             std::string number;
             bool hasDecimalPoint = false;
+            std::size_t startPos = i;
 
             while (i < expression.size() &&
-                   (std::isdigit(expression[i]) || expression[i] == '.')) {
-
+                   (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
                 if (expression[i] == '.') {
                     if (hasDecimalPoint) {
-                        throw std::runtime_error("Invalid number format");
+                        throw CalculatorException(
+                            ErrorType::InvalidNumber,
+                            "multiple decimal points in number",
+                            i + 1
+                        );
                     }
                     hasDecimalPoint = true;
                 }
 
                 number += expression[i];
                 ++i;
+            }
+
+            if (number == ".") {
+                throw CalculatorException(
+                    ErrorType::InvalidNumber,
+                    "standalone decimal point is not a valid number",
+                    startPos + 1
+                );
             }
 
             tokens.push_back({TokenType::Number, number});
@@ -105,7 +133,11 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 tokens.push_back({TokenType::RightParen, ")"});
                 break;
             default:
-                throw std::runtime_error(std::string("Invalid character: ") + c);
+                throw CalculatorException(
+                    ErrorType::InvalidCharacter,
+                    std::string("unexpected character '") + c + "'",
+                    i + 1
+                );
         }
 
         ++i;
