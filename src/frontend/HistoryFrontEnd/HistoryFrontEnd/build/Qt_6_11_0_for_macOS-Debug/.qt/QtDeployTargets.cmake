@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_HistoryFrontEnd_FILE /Users/eian/EECS348_Group_Project/src/frontend/HistoryFrontEnd/HistoryFrontEnd/build/Qt_6_11_0_for_macOS-Debug/HistoryFrontEnd.app/Contents/MacOS/HistoryFrontEnd)
+set(__QT_DEPLOY_TARGET_HistoryFrontEnd_TYPE EXECUTABLE)

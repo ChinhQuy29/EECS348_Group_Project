@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-fa584d9cacd20c58bac3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "HistoryFrontEnd",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "HistoryFrontEnd::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-HistoryFrontEnd-Debug-c7c078be810cfde3851a.json",
+					"name" : "HistoryFrontEnd",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "HistoryFrontEnd_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-HistoryFrontEnd_autogen-Debug-7cffb89c65b84d19e779.json",
+					"name" : "HistoryFrontEnd_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "HistoryFrontEnd_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-HistoryFrontEnd_autogen_timestamp_deps-Debug-a23d08f12b136bcf4cb4.json",
+					"name" : "HistoryFrontEnd_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/eian/EECS348_Group_Project/src/frontend/HistoryFrontEnd/HistoryFrontEnd/build/Qt_6_11_0_for_macOS-Debug",
+		"source" : "/Users/eian/EECS348_Group_Project/src/frontend/HistoryFrontEnd/HistoryFrontEnd"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
