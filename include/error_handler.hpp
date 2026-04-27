@@ -2,6 +2,7 @@
 
 #include <exception>
 #include <string>
+#include <string_view>
 
 enum class ErrorType {
     Lexical,
@@ -17,7 +18,7 @@ enum class ErrorType {
 
 class CalculatorException : public std::exception {
 public:
-    CalculatorException(ErrorType type, const std::string& message, std::size_t position = 0);
+    CalculatorException(ErrorType type, std::string_view message, std::size_t position = 0);
 
     const char* what() const noexcept override;
     ErrorType getType() const;
@@ -31,5 +32,5 @@ private:
 
 class ErrorHandler {
 public:
-    static std::string formatError(ErrorType type, const std::string& details, std::size_t position = 0);
+    static std::string formatError(ErrorType type, std::string_view details, std::size_t position = 0);
 };
