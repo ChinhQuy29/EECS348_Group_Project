@@ -1,3 +1,47 @@
+/*
+Description:
+Implements the Parser class, which converts a mathematical expression
+from infix notation to postfix notation using a stack-based algorithm.
+The parser ensures correct operator precedence and validates syntax,
+including proper operator placement and matching parentheses.
+
+Input:
+- infixTokens (std::vector<Token>): list of tokens representing the expression
+
+Tokens may include:
+- Numbers
+- Operators (+, -, *, /)
+- Parentheses ( ( and ) )
+
+Output:
+- Returns a std::vector<Token> representing the postfix expression
+- Throws errors for invalid syntax or mismatched parentheses
+
+Constraints:
+- Token list must not be empty
+- Operators cannot appear at the beginning or end
+- Operators cannot follow another operator or '('
+- Parentheses must be properly matched
+
+Algorithm:
+1. Check if token list is empty -> throws error if true
+
+2. Iterate through each token:
+   - If number -> add to output
+   - If operator:
+       - Validate placement
+       - Pop operators from stack based on precedence
+       - Push current operator to stack
+   - If '(' -> push to stack
+   - If ')' -> pop until matching '('
+
+3. After iteration:
+   - Pop remaining operators to output
+   - Throw error if unmatched parentheses remain
+
+4. Return postfix token list
+*/
+
 #include "../../include/parser.hpp"
 #include "../../include/error_handler.hpp"
 
