@@ -17,6 +17,7 @@ int Parser::precedence(TokenType type) const {
 }
 
 bool Parser::isOperator(TokenType type) const {
+    // Not Number, LeftParen, nor RightParen
     return type == TokenType::Plus ||
            type == TokenType::Minus ||
            type == TokenType::Multiply ||
@@ -24,87 +25,51 @@ bool Parser::isOperator(TokenType type) const {
 }
 
 std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) const {
-    if (infixTokens.empty()) {
-        throw CalculatorException(
-            ErrorType::EmptyExpression,
-            "no tokens were produced from the input"
-        );
-    }
-
-    std::vector<Token> output;
+    std::vector<Token> postfixTokens;
     std::stack<Token> operators;
+    std::stack<std::size_t> positionLeftParen; // Stack to track positions of left parentheses for error reporting
 
+    // for each token in the infix expression
     for (std::size_t i = 0; i < infixTokens.size(); ++i) {
         const Token& token = infixTokens[i];
 
         if (token.type == TokenType::Number) {
-            output.push_back(token);
+            postfixTokens.push_back(token);
         } else if (isOperator(token.type)) {
-            // basic syntax check: operator cannot be first or last
-            if (i == 0 || i == infixTokens.size() - 1) {
-                throw CalculatorException(
-                    ErrorType::Syntax,
-                    "operator cannot appear at the beginning or end of the expression",
-                    i + 1
-                );
-            }
-
-            // previous token cannot be another operator or left paren
-            TokenType prevType = infixTokens[i - 1].type;
-            if (isOperator(prevType) || prevType == TokenType::LeftParen) {
-                throw CalculatorException(
-                    ErrorType::Syntax,
-                    "unexpected operator placement",
-                    i + 1
-                );
-            }
+            ErrorHandler::validateOperatorPlacement(infixTokens, i);
 
             while (!operators.empty() &&
                    isOperator(operators.top().type) &&
                    precedence(operators.top().type) >= precedence(token.type)) {
-                output.push_back(operators.top());
+                postfixTokens.push_back(operators.top());
                 operators.pop();
             }
 
             operators.push(token);
         } else if (token.type == TokenType::LeftParen) {
             operators.push(token);
+            positionLeftParen.push(i + 1);
         } else if (token.type == TokenType::RightParen) {
-            bool foundLeftParen = false;
-
-            while (!operators.empty()) {
-                if (operators.top().type == TokenType::LeftParen) {
-                    foundLeftParen = true;
-                    operators.pop();
-                    break;
-                }
-
-                output.push_back(operators.top());
+            ErrorHandler::validateClosingParenthesis(operators, i + 1);
+            
+            // while inside the parentheses, move operators to output
+            while (operators.top().type != TokenType::LeftParen) {
+                postfixTokens.push_back(operators.top());
                 operators.pop();
             }
 
-            if (!foundLeftParen) {
-                throw CalculatorException(
-                    ErrorType::MismatchedParentheses,
-                    "closing parenthesis does not have a matching opening parenthesis",
-                    i + 1
-                );
-            }
+            // Pop the left parenthesis
+            operators.pop();
+            positionLeftParen.pop();
         }
     }
 
-    while (!operators.empty()) {
-        if (operators.top().type == TokenType::LeftParen ||
-            operators.top().type == TokenType::RightParen) {
-            throw CalculatorException(
-                ErrorType::MismatchedParentheses,
-                "opening parenthesis does not have a matching closing parenthesis"
-            );
-        }
+    ErrorHandler::validateOpeningParentheses(positionLeftParen);
 
-        output.push_back(operators.top());
+    while (!operators.empty()) {
+        postfixTokens.push_back(operators.top());
         operators.pop();
     }
 
-    return output;
+    return postfixTokens;
 }

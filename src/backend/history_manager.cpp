@@ -1,27 +1,25 @@
 #include "../../include/history_manager.hpp"
+#include "../../include/error_handler.hpp"
 
 #include <fstream>
 #include <sstream>
 #include <ctime>
 #include <iomanip>
-#include <stdexcept>
 
 HistoryManager::HistoryManager(const std::string& filename)
-    : filename(filename) {}
+    : filename(filename) {
+}
 
 void HistoryManager::saveCalculation(const std::string& expression, const std::string& result) {
     std::ofstream outFile(filename, std::ios::app);
-
-    if (!outFile) {
-        throw std::runtime_error("Failed to open history file for writing");
-    }
+    ErrorHandler::validateHistoryStream(static_cast<bool>(outFile));
 
     outFile << getCurrentTimestamp()
-            << " | "
-            << expression
-            << " = "
-            << result
-            << '\n';
+        << " | "
+        << expression
+        << " = "
+        << result
+        << '\n';
 }
 
 std::vector<std::string> HistoryManager::getLastCalculations(std::size_t count) const {
@@ -49,10 +47,7 @@ std::vector<std::string> HistoryManager::getLastCalculations(std::size_t count) 
 
 void HistoryManager::clearHistory() {
     std::ofstream outFile(filename, std::ios::trunc);
-
-    if (!outFile) {
-        throw std::runtime_error("Failed to clear history file");
-    }
+    ErrorHandler::validateHistoryStream(static_cast<bool>(outFile));
 }
 
 std::string HistoryManager::getCurrentTimestamp() const {

@@ -3,7 +3,13 @@
 
 #include <cctype>
 
+/*
+/ Splits the expression string into a vector of Tokens
+/ A Token stores the type of token and the substring of the expression that corresponds to it
+*/
+
 std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
+    ErrorHandler::validateExpression(expression);
     std::vector<Token> tokens;
     std::size_t i = 0;
 
@@ -12,18 +18,19 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
 
         if (std::isspace(static_cast<unsigned char>(c))) {
             ++i;
-            continue;
+            continue; // ignore
         }
 
-        // Handle unary minus for negative numbers
         if (c == '-') {
             bool unaryMinus = false;
 
+            // if first token
             if (tokens.empty()) {
                 unaryMinus = true;
             } else {
                 TokenType prev = tokens.back().type;
 
+                // if not Number nor RightParen
                 if (prev == TokenType::Plus ||
                     prev == TokenType::Minus ||
                     prev == TokenType::Multiply ||
@@ -33,47 +40,28 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 }
             }
 
+            // Handle unary minus for negative numbers
             if (unaryMinus) {
-                std::string number = "-";
                 ++i;
-
-                if (i >= expression.size() ||
-                    (!std::isdigit(static_cast<unsigned char>(expression[i])) && expression[i] != '.')) {
-                    throw CalculatorException(
-                        ErrorType::InvalidNumber,
-                        "expected digits after unary minus",
-                        i + 1
-                    );
-                }
-
+                std::string number;
                 bool hasDecimalPoint = false;
 
+                ErrorHandler::validateUnaryMinus(expression, i);
+
+                // while the following characters are part of a number
                 while (i < expression.size() &&
                        (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
                     if (expression[i] == '.') {
-                        if (hasDecimalPoint) {
-                            throw CalculatorException(
-                                ErrorType::InvalidNumber,
-                                "multiple decimal points in number",
-                                i + 1
-                            );
-                        }
+                        ErrorHandler::validateDecimalPoint(hasDecimalPoint, i + 1);
                         hasDecimalPoint = true;
                     }
 
                     number += expression[i];
                     ++i;
                 }
+                ErrorHandler::validateCompletedNumber(number, i);
 
-                if (number == "-.") {
-                    throw CalculatorException(
-                        ErrorType::InvalidNumber,
-                        "invalid negative decimal number",
-                        i
-                    );
-                }
-
-                tokens.push_back({TokenType::Number, number});
+                tokens.push_back({TokenType::Number, "-" + number});
                 continue;
             }
         }
@@ -82,32 +70,19 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
         if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
             std::string number;
             bool hasDecimalPoint = false;
-            std::size_t startPos = i;
 
+            // while the following characters are part of a number
             while (i < expression.size() &&
                    (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
                 if (expression[i] == '.') {
-                    if (hasDecimalPoint) {
-                        throw CalculatorException(
-                            ErrorType::InvalidNumber,
-                            "multiple decimal points in number",
-                            i + 1
-                        );
-                    }
+                    ErrorHandler::validateDecimalPoint(hasDecimalPoint, i + 1);
                     hasDecimalPoint = true;
                 }
 
                 number += expression[i];
                 ++i;
             }
-
-            if (number == ".") {
-                throw CalculatorException(
-                    ErrorType::InvalidNumber,
-                    "standalone decimal point is not a valid number",
-                    startPos + 1
-                );
-            }
+            ErrorHandler::validateCompletedNumber(number, i);
 
             tokens.push_back({TokenType::Number, number});
             continue;
@@ -133,11 +108,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 tokens.push_back({TokenType::RightParen, ")"});
                 break;
             default:
-                throw CalculatorException(
-                    ErrorType::InvalidCharacter,
-                    std::string("unexpected character '") + c + "'",
-                    i + 1
-                );
+                ErrorHandler::validateCharacter(c, i + 1);
         }
 
         ++i;
