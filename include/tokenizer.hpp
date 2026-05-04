@@ -21,4 +21,6 @@ struct Token {
 class Tokenizer {
 public:
     std::vector<Token> tokenize(const std::string& expression) const;
+private:
+    std::string extractNumber(const std::string& expression, std::size_t& i) const;
 };

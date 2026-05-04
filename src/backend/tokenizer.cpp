@@ -4,20 +4,40 @@
 #include <cctype>
 
 /*
+/ Extracts a number from the expression string starting at index i
+/ WARNING: Takes i by reference and updates it to the position after the number
+*/
+std::string Tokenizer::extractNumber(const std::string& expression, std::size_t& i) const {
+    std::string number;
+    bool countDecimalPoint = 0;
+
+    // for the following characters that are part of a number
+    for (; i < expression.size() && (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.'); i++) {
+        if (expression[i] == '.') {
+            ErrorHandler::validateDecimalPoint(countDecimalPoint, i + 1);
+            countDecimalPoint = 1;
+        }
+
+        number += expression[i];
+    }
+    ErrorHandler::validateCompletedNumber(number, i);
+    i--; // adjust i to the index of the last digit
+    return number;
+}
+
+/*
 / Splits the expression string into a vector of Tokens
 / A Token stores the type of token and the substring of the expression that corresponds to it
 */
-
 std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
     ErrorHandler::validateExpression(expression);
     std::vector<Token> tokens;
-    std::size_t i = 0;
+    
 
-    while (i < expression.size()) {
+    for (std::size_t i = 0; i < expression.size(); ++i) {
         char c = expression[i];
 
         if (std::isspace(static_cast<unsigned char>(c))) {
-            ++i;
             continue; // ignore
         }
 
@@ -30,12 +50,8 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             } else {
                 TokenType prev = tokens.back().type;
 
-                // if not Number nor RightParen
-                if (prev == TokenType::Plus ||
-                    prev == TokenType::Minus ||
-                    prev == TokenType::Multiply ||
-                    prev == TokenType::Divide ||
-                    prev == TokenType::LeftParen) {
+                // if is plus, minus, multiply, divide, or left parenthesis
+                if (prev != TokenType::Number && prev != TokenType::RightParen) {
                     unaryMinus = true;
                 }
             }
@@ -43,48 +59,16 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             // Handle unary minus for negative numbers
             if (unaryMinus) {
                 ++i;
-                std::string number;
-                bool hasDecimalPoint = false;
-
                 ErrorHandler::validateUnaryMinus(expression, i);
 
-                // while the following characters are part of a number
-                while (i < expression.size() &&
-                       (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
-                    if (expression[i] == '.') {
-                        ErrorHandler::validateDecimalPoint(hasDecimalPoint, i + 1);
-                        hasDecimalPoint = true;
-                    }
-
-                    number += expression[i];
-                    ++i;
-                }
-                ErrorHandler::validateCompletedNumber(number, i);
-
-                tokens.push_back({TokenType::Number, "-" + number});
+                tokens.push_back({TokenType::Number, "-" + extractNumber(expression, i)});
                 continue;
             }
         }
 
         // Handle normal numbers
         if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
-            std::string number;
-            bool hasDecimalPoint = false;
-
-            // while the following characters are part of a number
-            while (i < expression.size() &&
-                   (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.')) {
-                if (expression[i] == '.') {
-                    ErrorHandler::validateDecimalPoint(hasDecimalPoint, i + 1);
-                    hasDecimalPoint = true;
-                }
-
-                number += expression[i];
-                ++i;
-            }
-            ErrorHandler::validateCompletedNumber(number, i);
-
-            tokens.push_back({TokenType::Number, number});
+            tokens.push_back({TokenType::Number, extractNumber(expression, i)});
             continue;
         }
 
@@ -110,8 +94,6 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             default:
                 ErrorHandler::validateCharacter(c, i + 1);
         }
-
-        ++i;
     }
 
     return tokens;

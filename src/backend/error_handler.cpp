@@ -24,27 +24,50 @@ Type and position are directly assigned from the constructor parameters, then th
 formatError() uses a compile-time constant lookup table of message prefixes.
 */
 
-bool isOperatorToken(TokenType type) {
-  return type == TokenType::Plus || type == TokenType::Minus ||
-    type == TokenType::Multiply || type == TokenType::Divide;
-}
-
 CalculatorException::CalculatorException(ErrorType type,
   std::string_view details,
   std::size_t position)
   : type(type), position(position) {
-  this->message = ErrorHandler::formatError(type, details, position);
+  this->message = CalculatorException::formatError(type, details, position);
 }
 
-const char* CalculatorException::what() const noexcept {
-  return message.c_str();
-}
+const char* CalculatorException::what() const noexcept { return message.c_str(); }
 ErrorType CalculatorException::getType() const { return type; }
 std::size_t CalculatorException::getPosition() const { return position; }
 
+std::string CalculatorException::formatError(ErrorType type, std::string_view details,
+  std::size_t position) {
+  static constexpr std::array<std::string_view, 10> prefixes = {
+    "Lexical error",
+    "Syntax error",
+    "Evaluation error",
+    "I/O error",
+    "Empty expression",
+    "Division by zero",
+    "Invalid character",
+    "Invalid number",
+    "Mismatched parentheses",
+    "Invalid expression",
+  };
+
+  std::string_view prefix;
+  if (static_cast<std::size_t>(type) < prefixes.size()) {
+    prefix = prefixes[static_cast<std::size_t>(type)];
+  }
+  else {
+    prefix = "Error";
+  }
+
+  std::string result = std::string(prefix) + ": " + std::string(details);
+  if (position != 0)
+    result.insert(result.find(':'), " at position " + std::to_string(position));
+  return result;
+}
+
 void ErrorHandler::validateExpression(std::string_view expression) {
   if (std::all_of(expression.begin(), expression.end(), [](unsigned char c) { return std::isspace(c); })) {
-    throw CalculatorException(ErrorType::EmptyExpression,
+    throw CalculatorException(
+      ErrorType::EmptyExpression,
       "input expression is empty");
   }
 }
@@ -54,7 +77,8 @@ void ErrorHandler::validateUnaryMinus(std::string_view expression,
   if (nextPosition >= expression.size() ||
     (!std::isdigit(static_cast<unsigned char>(expression[nextPosition])) &&
       expression[nextPosition] != '.')) {
-    throw CalculatorException(ErrorType::InvalidNumber,
+    throw CalculatorException(
+      ErrorType::InvalidNumber,
       "expected digits after unary minus",
       nextPosition);
   }
@@ -64,8 +88,10 @@ void ErrorHandler::validateDecimalPoint(bool countDecimalPoint,
   std::size_t position) {
   // if already has a decimal point
   if (countDecimalPoint) {
-    throw CalculatorException(ErrorType::InvalidNumber,
-      "multiple decimal points in number", position);
+    throw CalculatorException(
+      ErrorType::InvalidNumber,
+      "multiple decimal points in number",
+      position);
   }
 }
 
@@ -81,7 +107,10 @@ void ErrorHandler::validateCompletedNumber(std::string_view number,
 
 void ErrorHandler::validateCharacter(char character, std::size_t position) {
   std::string msg = "unexpected character '" + std::string(1, character) + "'";
-  throw CalculatorException(ErrorType::InvalidCharacter, msg, position);
+  throw CalculatorException(
+    ErrorType::InvalidCharacter,
+    msg,
+    position);
 }
 
 
@@ -89,7 +118,8 @@ void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, s
   if (tokenIndex > 0 && tokenIndex < tokens.size() - 1) {
     TokenType previousType = tokens[tokenIndex - 1].type;
 
-    if (!(isOperatorToken(previousType) || previousType == TokenType::LeftParen)) {
+    // if not Plus, Minus, Multiply, Divide, nor LeftParen
+    if (previousType == TokenType::Number || previousType == TokenType::RightParen) {
       throw CalculatorException(
         ErrorType::Syntax,
         "tokens must be separated by operators",
@@ -113,11 +143,14 @@ void ErrorHandler::validateOperatorPlacement(const std::vector<Token>& tokens,
       "operator cannot appear at the end of the expression",
       tokenIndex + 1);
   }
-
   TokenType previousType = tokens[tokenIndex - 1].type;
-  if (isOperatorToken(previousType) || previousType == TokenType::LeftParen) {
-    throw CalculatorException(ErrorType::Syntax,
-      "unexpected operator placement", tokenIndex + 1);
+
+  // if is Plus, Minus, Multiply, Divide, or LeftParen
+  if (previousType != TokenType::Number && previousType != TokenType::RightParen) {
+    throw CalculatorException(
+      ErrorType::Syntax,
+      "unexpected operator placement",
+      tokenIndex + 1);
   }
 }
 
@@ -149,49 +182,26 @@ void ErrorHandler::validatePostfixOperandCount(std::size_t valueCount,
   if (valueCount < 2) {
     std::string msg = "not enough operands for operator '" +
       std::string(token) + "'";
-    throw CalculatorException(ErrorType::InvalidExpression, msg, position);
+    throw CalculatorException(
+      ErrorType::InvalidExpression,
+      msg,
+      position);
   }
 }
 
 void ErrorHandler::validateDivisionByZero(double right, std::size_t position) {
   if (right == 0.0) {
-    throw CalculatorException(ErrorType::DivisionByZero,
-      "cannot divide by zero", position);
+    throw CalculatorException(
+      ErrorType::DivisionByZero,
+      "cannot divide by zero",
+      position);
   }
 }
 
 void ErrorHandler::validateHistoryStream(bool streamOk) {
   if (!streamOk) {
-    throw CalculatorException(ErrorType::IOError,
+    throw CalculatorException(
+      ErrorType::IOError,
       "failed to open history file");
   }
-}
-
-std::string ErrorHandler::formatError(ErrorType type, std::string_view details,
-  std::size_t position) {
-  static constexpr std::array<std::string_view, 10> prefixes = {
-    "Lexical error",
-    "Syntax error",
-    "Evaluation error",
-    "I/O error",
-    "Empty expression",
-    "Division by zero",
-    "Invalid character",
-    "Invalid number",
-    "Mismatched parentheses",
-    "Invalid expression",
-  };
-
-  std::string_view prefix;
-  if (static_cast<std::size_t>(type) < prefixes.size()) {
-    prefix = prefixes[static_cast<std::size_t>(type)];
-  }
-  else {
-    prefix = "Error";
-  }
-
-  std::string result = std::string(prefix) + ": " + std::string(details);
-  if (position != 0)
-    result.insert(result.find(':'), " at position " + std::to_string(position));
-  return result;
 }

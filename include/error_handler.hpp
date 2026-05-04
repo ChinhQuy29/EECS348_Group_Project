@@ -28,10 +28,12 @@ public:
     ErrorType getType() const;
     std::size_t getPosition() const;
 
-private: // Stored values
+private:
     ErrorType type;
     std::string message;
     std::size_t position;
+
+    static std::string formatError(ErrorType type, std::string_view details, std::size_t position = 0);
 };
 
 class ErrorHandler {
@@ -48,6 +50,4 @@ public:
     static void validatePostfixOperandCount(std::size_t valueCount, std::string_view token, std::size_t position);
     static void validateDivisionByZero(double right, std::size_t position);
     static void validateHistoryStream(bool streamOk);
-
-    static std::string formatError(ErrorType type, std::string_view details, std::size_t position = 0);
 };
