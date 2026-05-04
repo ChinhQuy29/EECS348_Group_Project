@@ -84,6 +84,20 @@ void ErrorHandler::validateCharacter(char character, std::size_t position) {
   throw CalculatorException(ErrorType::InvalidCharacter, msg, position);
 }
 
+
+void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, std::size_t tokenIndex) {
+  if (tokenIndex > 0 && tokenIndex < tokens.size() - 1) {
+    TokenType previousType = tokens[tokenIndex - 1].type;
+
+    if (!(isOperatorToken(previousType) || previousType == TokenType::LeftParen)) {
+      throw CalculatorException(
+        ErrorType::Syntax,
+        "tokens must be separated by operators",
+        tokenIndex + 1);
+    }
+  }
+}
+
 void ErrorHandler::validateOperatorPlacement(const std::vector<Token>& tokens,
   std::size_t tokenIndex) {
   if (tokenIndex == 0) {
@@ -120,7 +134,7 @@ void ErrorHandler::validateClosingParenthesis(
   }
 }
 
-void ErrorHandler::validateOpeningParentheses(std::stack<std::size_t> positionLeftParen) {
+void ErrorHandler::validateOpeningParenthesis(std::stack<std::size_t> positionLeftParen) {
   while (!positionLeftParen.empty()) {
     throw CalculatorException(
       ErrorType::MismatchedParentheses,
@@ -144,13 +158,6 @@ void ErrorHandler::validateDivisionByZero(double right, std::size_t position) {
     throw CalculatorException(ErrorType::DivisionByZero,
       "cannot divide by zero", position);
   }
-}
-
-void ErrorHandler::validateUnexpectedEvaluationToken(std::string_view value,
-  std::size_t position) {
-  std::string msg = "unexpected token '" + std::string(value) +
-    "' during evaluation";
-  throw CalculatorException(ErrorType::Evaluation, msg, position);
 }
 
 void ErrorHandler::validateHistoryStream(bool streamOk) {

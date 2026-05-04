@@ -34,6 +34,7 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
         const Token& token = infixTokens[i];
 
         if (token.type == TokenType::Number) {
+            ErrorHandler::validateOperatorExistence(infixTokens, i);
             postfixTokens.push_back(token);
         } else if (isOperator(token.type)) {
             ErrorHandler::validateOperatorPlacement(infixTokens, i);
@@ -46,7 +47,9 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
             }
 
             operators.push(token);
-        } else if (token.type == TokenType::LeftParen) {
+        }
+        else if (token.type == TokenType::LeftParen) {
+            ErrorHandler::validateOperatorExistence(infixTokens, i);
             operators.push(token);
             positionLeftParen.push(i + 1);
         } else if (token.type == TokenType::RightParen) {
@@ -64,7 +67,7 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
         }
     }
 
-    ErrorHandler::validateOpeningParentheses(positionLeftParen);
+    ErrorHandler::validateOpeningParenthesis(positionLeftParen);
 
     while (!operators.empty()) {
         postfixTokens.push_back(operators.top());

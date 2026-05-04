@@ -41,12 +41,12 @@ public:
     static void validateDecimalPoint(bool hasDecimalPoint, std::size_t position);
     static void validateCompletedNumber(std::string_view number, std::size_t position);
     static void validateCharacter(char character, std::size_t position);
+    static void validateOperatorExistence(const std::vector<Token>& tokens, std::size_t tokenIndex);
     static void validateOperatorPlacement(const std::vector<Token>& tokens, std::size_t tokenIndex);
     static void validateClosingParenthesis(std::stack<Token> operators, std::size_t position);
-    static void validateOpeningParentheses(std::stack<std::size_t> positionLeftParen);
+    static void validateOpeningParenthesis(std::stack<std::size_t> positionLeftParen);
     static void validatePostfixOperandCount(std::size_t valueCount, std::string_view token, std::size_t position);
     static void validateDivisionByZero(double right, std::size_t position);
-    static void validateUnexpectedEvaluationToken(std::string_view value, std::size_t position);
     static void validateHistoryStream(bool streamOk);
 
     static std::string formatError(ErrorType type, std::string_view details, std::size_t position = 0);
