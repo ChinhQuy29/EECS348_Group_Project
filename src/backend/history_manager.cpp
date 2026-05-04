@@ -41,34 +41,31 @@ Algorithm:
 */
 
 #include "../../include/history_manager.hpp"
+#include "../../include/error_handler.hpp"
 
-#include <fstream>      // file I/O
-#include <sstream>      // string stream
-#include <ctime>        // time functions
-#include <iomanip>      // for put_time formatting
-#include <stdexcept>        // for runtime_error exceptions
+#include <fstream>
+#include <sstream>
+#include <ctime>
+#include <iomanip>
 
 // Constructor that initializes the history manager with a filename for storing history
 HistoryManager::HistoryManager(const std::string& filename)
-    : filename(filename) {}
+    : filename(filename) {
+}
 
 // Adds a new calculation (including all details) to the history file
 void HistoryManager::saveCalculation(const std::string& expression, const std::string& result) {
     // Open the history file in append mode to avoid overwriting existing ones
     std::ofstream outFile(filename, std::ios::app);
-
-    // If the file cannot be opened, throw an exception to indicate the failure
-    if (!outFile) {
-        throw std::runtime_error("Failed to open history file for writing");
-    }
+    ErrorHandler::validateHistoryStream(static_cast<bool>(outFile));
 
     // Formatted entry: [timestamp] | expression = result
     outFile << getCurrentTimestamp()
-            << " | "
-            << expression
-            << " = "
-            << result
-            << '\n';
+        << " | "
+        << expression
+        << " = "
+        << result
+        << '\n';
 }
 
 // Returns the last 'count' calculations from the history file
@@ -105,11 +102,7 @@ std::vector<std::string> HistoryManager::getLastCalculations(std::size_t count) 
 void HistoryManager::clearHistory() {
     // Open the history file in truncation mode
     std::ofstream outFile(filename, std::ios::trunc);
-
-    // If the file cannot be opened, throw exception to indicate failure
-    if (!outFile) {
-        throw std::runtime_error("Failed to clear history file");
-    }
+    ErrorHandler::validateHistoryStream(static_cast<bool>(outFile));
 }
 
 // Generates a timestamp in the format "YYYY-MM-DD HH:MM:SS" for the current local time
