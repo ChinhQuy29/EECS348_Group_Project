@@ -15,13 +15,17 @@ Implements CalculatorException and ErrorHandler.
 CalculatorException stores an `ErrorType`, a formatted message, and the error position (starting from one) in the expression.
 ErrorHandler provides `formatError()` which builds human-readable error strings.
 
-Input: This module takes an ErrorType (defined in error_types.hpp), an std::string_view with error details, and an optional unsigned integer position of an error.
+Input: This module takes an ErrorType (defined in error_types.hpp), an std::string_view with error details, and an optional unsigned integer tokenIndex of an error.
 
 Output: Returns a formatted std::string containing information from the error prefix, details, and optionally the one-indexed position.
 
 Algorithm: When a CalculatorException is created, the constructor initializes the error type, message, and position.
 Type and position are directly assigned from the constructor parameters, then the error message is generated and stored using the formatError method.
 formatError() uses a compile-time constant lookup table of message prefixes.
+
+NOTE: For validation functions used in the tokenizer, charIndex refers to the expression string, including whitespace.
+For validation functions used in the parser, tokenIndex refers to the infix vector of tokens, which does not include whitespace.
+For validation functions used in the evaluator, postfixIndex refers to the postfix vector of tokens, which does not include parentheses nor whitespace.
 */
 
 CalculatorException::CalculatorException(ErrorType type,
@@ -64,6 +68,7 @@ std::string CalculatorException::formatError(ErrorType type, std::string_view de
   return result;
 }
 
+// Used in tokenizer
 void ErrorHandler::validateExpression(std::string_view expression) {
   if (std::all_of(expression.begin(), expression.end(), [](unsigned char c) { return std::isspace(c); })) {
     throw CalculatorException(
@@ -72,48 +77,52 @@ void ErrorHandler::validateExpression(std::string_view expression) {
   }
 }
 
+// Used in tokenizer
 void ErrorHandler::validateUnaryMinus(std::string_view expression,
-  std::size_t nextPosition) {
-  if (nextPosition >= expression.size() ||
-    (!std::isdigit(static_cast<unsigned char>(expression[nextPosition])) &&
-      expression[nextPosition] != '.')) {
+  std::size_t nextCharIndex) {
+  if (nextCharIndex >= expression.size() ||
+    (!std::isdigit(static_cast<unsigned char>(expression[nextCharIndex])) &&
+      expression[nextCharIndex] != '.')) {
     throw CalculatorException(
       ErrorType::InvalidNumber,
       "expected digits after unary minus",
-      nextPosition);
+      nextCharIndex + 1);
   }
 }
 
+// Used in tokenizer
 void ErrorHandler::validateDecimalPoint(bool countDecimalPoint,
-  std::size_t position) {
+  std::size_t charIndex) {
   // if already has a decimal point
   if (countDecimalPoint) {
     throw CalculatorException(
       ErrorType::InvalidNumber,
       "multiple decimal points in number",
-      position);
+      charIndex + 1);
   }
 }
 
+// Used in tokenizer
 void ErrorHandler::validateCompletedNumber(std::string_view number,
-  std::size_t position) {
+  std::size_t charIndex) {
   if (number == ".") {
     throw CalculatorException(
       ErrorType::InvalidNumber,
       "standalone decimal point is not a valid number",
-      position);
+      charIndex + 1);
   }
 }
 
-void ErrorHandler::validateCharacter(char character, std::size_t position) {
+// Used in tokenizer
+void ErrorHandler::validateCharacter(char character, std::size_t charIndex) {
   std::string msg = "unexpected character '" + std::string(1, character) + "'";
   throw CalculatorException(
     ErrorType::InvalidCharacter,
     msg,
-    position);
+    charIndex + 1);
 }
 
-
+// Used in parser
 void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, std::size_t tokenIndex) {
   if (tokenIndex > 0 && tokenIndex < tokens.size() - 1) {
     TokenType previousType = tokens[tokenIndex - 1].type;
@@ -128,6 +137,7 @@ void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, s
   }
 }
 
+// Used in parser
 void ErrorHandler::validateOperatorPlacement(const std::vector<Token>& tokens,
   std::size_t tokenIndex) {
   if (tokenIndex == 0) {
@@ -154,8 +164,9 @@ void ErrorHandler::validateOperatorPlacement(const std::vector<Token>& tokens,
   }
 }
 
+// Used in parser
 void ErrorHandler::validateClosingParenthesis(
-  std::stack<Token> operators, std::size_t position) {
+  std::stack<Token> operators, std::size_t tokenIndex) {
   while (!operators.empty() && operators.top().type != TokenType::LeftParen) {
     operators.pop();
   }
@@ -163,10 +174,11 @@ void ErrorHandler::validateClosingParenthesis(
     throw CalculatorException(
       ErrorType::MismatchedParentheses,
       "closing parenthesis does not have a matching opening parenthesis",
-      position);
+      tokenIndex + 1);
   }
 }
 
+// Used in parser
 void ErrorHandler::validateOpeningParenthesis(std::stack<std::size_t> positionLeftParen) {
   while (!positionLeftParen.empty()) {
     throw CalculatorException(
@@ -176,25 +188,27 @@ void ErrorHandler::validateOpeningParenthesis(std::stack<std::size_t> positionLe
   }
 }
 
+// Used in evaluator
 void ErrorHandler::validatePostfixOperandCount(std::size_t valueCount,
   std::string_view token,
-  std::size_t position) {
+  std::size_t postfixIndex) {
   if (valueCount < 2) {
     std::string msg = "not enough operands for operator '" +
       std::string(token) + "'";
     throw CalculatorException(
       ErrorType::InvalidExpression,
       msg,
-      position);
+      postfixIndex + 1);
   }
 }
 
-void ErrorHandler::validateDivisionByZero(double right, std::size_t position) {
+// Used in evaluator
+void ErrorHandler::validateDivisionByZero(double right, std::size_t postfixIndex) {
   if (right == 0.0) {
     throw CalculatorException(
       ErrorType::DivisionByZero,
       "cannot divide by zero",
-      position);
+      postfixIndex + 1);
   }
 }
 

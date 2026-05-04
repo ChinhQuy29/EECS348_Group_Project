@@ -5,7 +5,7 @@
 
 /*
 / Extracts a number from the expression string starting at index i
-/ WARNING: Takes i by reference and updates it to the position after the number
+/ WARNING: Takes i by reference and updates it to the position of the last digit of the number
 */
 std::string Tokenizer::extractNumber(const std::string& expression, std::size_t& i) const {
     std::string number;
@@ -14,19 +14,18 @@ std::string Tokenizer::extractNumber(const std::string& expression, std::size_t&
     // for the following characters that are part of a number
     for (; i < expression.size() && (std::isdigit(static_cast<unsigned char>(expression[i])) || expression[i] == '.'); i++) {
         if (expression[i] == '.') {
-            ErrorHandler::validateDecimalPoint(countDecimalPoint, i + 1);
+            ErrorHandler::validateDecimalPoint(countDecimalPoint, i);
             countDecimalPoint = 1;
         }
 
         number += expression[i];
     }
-    ErrorHandler::validateCompletedNumber(number, i);
-    i--; // adjust i to the index of the last digit
+    ErrorHandler::validateCompletedNumber(number, --i); // adjust i to the index of the last digit
     return number;
 }
 
 /*
-/ Splits the expression string into a vector of Tokens
+/ Splits the expression string into a vector of Tokens in infix order
 / A Token stores the type of token and the substring of the expression that corresponds to it
 */
 std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
@@ -38,7 +37,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
         char c = expression[i];
 
         if (std::isspace(static_cast<unsigned char>(c))) {
-            continue; // ignore
+            continue; // then ignore
         }
 
         if (c == '-') {
@@ -92,7 +91,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 tokens.push_back({TokenType::RightParen, ")"});
                 break;
             default:
-                ErrorHandler::validateCharacter(c, i + 1);
+                ErrorHandler::validateCharacter(c, i);
         }
     }
 
