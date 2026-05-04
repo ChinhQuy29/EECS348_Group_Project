@@ -27,7 +27,7 @@ bool Parser::isOperator(TokenType type) const {
 std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) const {
     std::vector<Token> postfixTokens;
     std::stack<Token> operators;
-    std::stack<std::size_t> positionLeftParen; // Stack to track positions of left parentheses for error reporting
+    std::stack<std::size_t> leftParenIndices; // Stack to track indices of left parentheses for error reporting
 
     // for each token in the infix expression
     for (std::size_t i = 0; i < infixTokens.size(); ++i) {
@@ -51,9 +51,9 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
         else if (token.type == TokenType::LeftParen) {
             ErrorHandler::validateOperatorExistence(infixTokens, i);
             operators.push(token);
-            positionLeftParen.push(i + 1);
+            leftParenIndices.push(token.index);
         } else if (token.type == TokenType::RightParen) {
-            ErrorHandler::validateClosingParenthesis(operators, i + 1);
+            ErrorHandler::validateClosingParenthesis(operators, token.index);
             
             // while inside the parentheses, move operators to output
             while (operators.top().type != TokenType::LeftParen) {
@@ -63,11 +63,11 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
 
             // Pop the left parenthesis
             operators.pop();
-            positionLeftParen.pop();
+            leftParenIndices.pop();
         }
     }
 
-    ErrorHandler::validateOpeningParenthesis(positionLeftParen);
+    ErrorHandler::validateOpeningParenthesis(leftParenIndices);
 
     while (!operators.empty()) {
         postfixTokens.push_back(operators.top());

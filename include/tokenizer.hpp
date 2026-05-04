@@ -16,6 +16,7 @@ enum class TokenType {
 struct Token {
     TokenType type;
     std::string value;
+    size_t index; // 0-based index in the original expression for error reporting
 };
 
 class Tokenizer {

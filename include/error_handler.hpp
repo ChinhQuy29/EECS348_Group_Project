@@ -39,15 +39,15 @@ private:
 class ErrorHandler {
 public:
     static void validateExpression(std::string_view expression);
-    static void validateUnaryMinus(std::string_view expression, std::size_t nextPosition);
-    static void validateDecimalPoint(bool hasDecimalPoint, std::size_t position);
-    static void validateCompletedNumber(std::string_view number, std::size_t position);
-    static void validateCharacter(char character, std::size_t position);
+    static void validateUnaryMinus(std::string_view expression, std::size_t nextIndex);
+    static void validateDecimalPoint(bool hasDecimalPoint, std::size_t index);
+    static void validateCompletedNumber(std::string_view number, std::size_t index);
+    static void validateCharacter(char character, std::size_t index);
     static void validateOperatorExistence(const std::vector<Token>& tokens, std::size_t tokenIndex);
     static void validateOperatorPlacement(const std::vector<Token>& tokens, std::size_t tokenIndex);
-    static void validateClosingParenthesis(std::stack<Token> operators, std::size_t position);
-    static void validateOpeningParenthesis(std::stack<std::size_t> positionLeftParen);
-    static void validatePostfixOperandCount(std::size_t valueCount, std::string_view token, std::size_t position);
-    static void validateDivisionByZero(double right, std::size_t position);
+    static void validateClosingParenthesis(std::stack<Token> operators, std::size_t rightParenIndex);
+    static void validateOpeningParenthesis(std::stack<std::size_t> leftParenIndices);
+    static void validatePostfixOperandCount(std::size_t valueCount, std::string_view token, std::size_t operatorIndex);
+    static void validateDivisionByZero(double right, std::size_t rightOperandIndex);
     static void validateHistoryStream(bool streamOk);
 };

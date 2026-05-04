@@ -5,7 +5,7 @@
 
 /*
 / Extracts a number from the expression string starting at index i
-/ WARNING: Takes i by reference and updates it to the position of the last digit of the number
+/ WARNING: Takes i by reference and updates it to the index of the last digit of the number
 */
 std::string Tokenizer::extractNumber(const std::string& expression, std::size_t& i) const {
     std::string number;
@@ -31,67 +31,51 @@ std::string Tokenizer::extractNumber(const std::string& expression, std::size_t&
 std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
     ErrorHandler::validateExpression(expression);
     std::vector<Token> tokens;
-    
 
     for (std::size_t i = 0; i < expression.size(); ++i) {
         char c = expression[i];
 
-        if (std::isspace(static_cast<unsigned char>(c))) {
-            continue; // then ignore
-        }
+        if (std::isspace(static_cast<unsigned char>(c))) { // Handle whitespace
+            // then ignore
 
-        if (c == '-') {
-            bool unaryMinus = false;
+        } else if (c == '-' // Handle unary minus
+                   && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
+                       || (tokens.back().type != TokenType::Number
+                           && tokens.back().type != TokenType::RightParen))) {
 
-            // if first token
-            if (tokens.empty()) {
-                unaryMinus = true;
-            } else {
-                TokenType prev = tokens.back().type;
+            std::size_t minusIndex = i;
+            ++i;
+            ErrorHandler::validateUnaryMinus(expression, i);
 
-                // if is plus, minus, multiply, divide, or left parenthesis
-                if (prev != TokenType::Number && prev != TokenType::RightParen) {
-                    unaryMinus = true;
-                }
+            tokens.push_back({TokenType::Number, "-" + extractNumber(expression, i), minusIndex});
+
+        } else if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') { // Handle normal numbers
+            std::size_t numberIndex = i;
+            tokens.push_back({TokenType::Number, extractNumber(expression, i), numberIndex});
+
+        } else { // Handle operators and parentheses
+            switch (c) {
+                case '+':
+                    tokens.push_back({TokenType::Plus, "+", i});
+                    break;
+                case '-':
+                    tokens.push_back({TokenType::Minus, "-", i});
+                    break;
+                case '*':
+                    tokens.push_back({TokenType::Multiply, "*", i});
+                    break;
+                case '/':
+                    tokens.push_back({TokenType::Divide, "/", i});
+                    break;
+                case '(':
+                    tokens.push_back({TokenType::LeftParen, "(", i});
+                    break;
+                case ')':
+                    tokens.push_back({TokenType::RightParen, ")", i});
+                    break;
+                default:
+                    ErrorHandler::validateCharacter(c, i);
             }
-
-            // Handle unary minus for negative numbers
-            if (unaryMinus) {
-                ++i;
-                ErrorHandler::validateUnaryMinus(expression, i);
-
-                tokens.push_back({TokenType::Number, "-" + extractNumber(expression, i)});
-                continue;
-            }
-        }
-
-        // Handle normal numbers
-        if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') {
-            tokens.push_back({TokenType::Number, extractNumber(expression, i)});
-            continue;
-        }
-
-        switch (c) {
-            case '+':
-                tokens.push_back({TokenType::Plus, "+"});
-                break;
-            case '-':
-                tokens.push_back({TokenType::Minus, "-"});
-                break;
-            case '*':
-                tokens.push_back({TokenType::Multiply, "*"});
-                break;
-            case '/':
-                tokens.push_back({TokenType::Divide, "/"});
-                break;
-            case '(':
-                tokens.push_back({TokenType::LeftParen, "("});
-                break;
-            case ')':
-                tokens.push_back({TokenType::RightParen, ")"});
-                break;
-            default:
-                ErrorHandler::validateCharacter(c, i);
         }
     }
 
