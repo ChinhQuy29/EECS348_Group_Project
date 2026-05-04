@@ -47,7 +47,7 @@ public:
     static void validateOperatorPlacement(const std::vector<Token>& tokens, std::size_t tokenIndex);
     static void validateClosingParenthesis(std::stack<Token> operators, std::size_t rightParenIndex);
     static void validateOpeningParenthesis(std::stack<std::size_t> leftParenIndices);
-    static void validatePostfixOperandCount(std::size_t valueCount, std::string_view token, std::size_t operatorIndex);
-    static void validateDivisionByZero(double right, std::size_t rightOperandIndex);
+    static void validatePostfixOperandCount(std::size_t valueCount, const Token& token);
+    static void validateDivisionByZero(long double rightOperandValue, std::size_t rightOperandIndex);
     static void validateHistoryStream(bool streamOk);
 };

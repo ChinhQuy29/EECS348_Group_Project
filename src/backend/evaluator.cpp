@@ -5,28 +5,28 @@
 #include <string>
 
 double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
-    struct ValueEntry {
-        double value;
+    struct ValueToken {
+        long double value;
         std::size_t index;
     };
 
-    std::stack<ValueEntry> values; // Stack to hold intermediate values and indices during evaluation
+    std::stack<ValueToken> values; // Stack to hold intermediate values and indices during evaluation
 
     for (std::size_t i = 0; i < postfixTokens.size(); ++i) { // Iterate through each token in the postfix expression
         const Token& token = postfixTokens[i];
 
         // If the token is a number, convert it to a double and push it onto the stack
         if (token.type == TokenType::Number) {
-                values.push({std::stod(token.value), token.index});
+                values.push({std::stold(token.value), token.index});
             continue;
         }
 
-        ErrorHandler::validatePostfixOperandCount(values.size(), token.value, token.index);
+        ErrorHandler::validatePostfixOperandCount(values.size(), token);
 
         //Pop the top two values from the stack to use as operands for the operator
-        ValueEntry right = values.top();
+        ValueToken right = values.top();
         values.pop();
-        ValueEntry left = values.top();
+        ValueToken left = values.top();
         values.pop();
 
         //Perform the appropriate operation based on the type of operator token and push the result back onto the stack

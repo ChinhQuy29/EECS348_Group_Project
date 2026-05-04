@@ -67,7 +67,7 @@ std::string CalculatorException::formatError(ErrorType type, std::string_view de
 
 // Used in tokenizer
 void ErrorHandler::validateExpression(std::string_view expression) {
-  if (std::all_of(expression.begin(), expression.end(), [](unsigned char c) { return std::isspace(c); })) {
+  if (std::all_of(expression.begin(), expression.end(), [](unsigned char c) { return (std::isspace(c) || c == '(' || c == ')'); })) {
     throw CalculatorException(
       ErrorType::EmptyExpression,
       "input expression is empty");
@@ -187,21 +187,18 @@ void ErrorHandler::validateOpeningParenthesis(std::stack<std::size_t> leftParenI
 
 // Used in evaluator
 void ErrorHandler::validatePostfixOperandCount(std::size_t valueCount,
-  std::string_view token,
-  std::size_t operatorIndex) {
+  const Token& token) {
   if (valueCount < 2) {
-    std::string msg = "not enough operands for operator '" +
-      std::string(token) + "'";
     throw CalculatorException(
-      ErrorType::InvalidExpression,
-      msg,
-      operatorIndex + 1);
+      ErrorType::Syntax,
+      "not enough operands for operator '" + token.value + "'",
+      token.index + 1);
   }
 }
 
 // Used in evaluator
-void ErrorHandler::validateDivisionByZero(double right, std::size_t rightOperandIndex) {
-  if (right == 0.0) {
+void ErrorHandler::validateDivisionByZero(long double rightOperandValue, std::size_t rightOperandIndex) {
+  if (rightOperandValue == 0.0) {
     throw CalculatorException(
       ErrorType::DivisionByZero,
       "cannot divide by zero",
