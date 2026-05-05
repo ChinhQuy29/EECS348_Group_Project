@@ -81,6 +81,18 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
     for (std::size_t i = 0; i < infixTokens.size(); ++i) {
         const Token& token = infixTokens[i];
 
+        // Check for invalid syntax: number followed by '(' without operator
+        if (i > 0 &&
+        infixTokens[i - 1].type == TokenType::Number &&
+        token.type == TokenType::LeftParen) {
+
+        throw CalculatorException(
+            ErrorType::Syntax,
+            "missing operator before '('",
+            i + 1
+        );
+    }
+
         if (token.type == TokenType::Number) {
             output.push_back(token);
         } else if (isOperator(token.type)) {
