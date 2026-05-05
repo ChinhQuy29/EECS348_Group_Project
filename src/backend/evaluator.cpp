@@ -1,11 +1,13 @@
 #include "../../include/evaluator.hpp"
 #include "../../include/error_handler.hpp"
 
+#include <chrono>
 #include <cmath>
-#include <ctime>
+#include <functional>
+#include <random>
 #include <stack>
 #include <string>
-#include <random>
+#include <thread>
 
 /*
 Description: Evaluates a postfix (Reverse Polish Notation) expression and returns
@@ -26,6 +28,12 @@ are popped, the operation is applied, and the result is pushed back. After all t
 are processed, the single remaining stack value is returned as the final result.
 */
 
+unsigned int Evaluator::makeSeed() const {
+    const long time = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    const std::size_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+    return static_cast<unsigned int>(time ^ static_cast<decltype(time)>(threadID));
+}
+
 double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
     struct ValueToken {
         long double value;
@@ -43,7 +51,7 @@ double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const
             continue;
         }
         if (currentToken.type == TokenType::RandomMax) {
-            std::default_random_engine generator(static_cast<unsigned int>(std::time(nullptr)));
+            static std::default_random_engine generator(makeSeed());
             std::uniform_int_distribution<int> distribution(1, std::stoi(currentToken.value));
             values.push({static_cast<long double>(distribution(generator)), currentToken.index});
             continue;
