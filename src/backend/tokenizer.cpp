@@ -68,9 +68,27 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
 
             std::size_t minusIndex = i;
             ++i;
-            ErrorHandler::validateUnaryMinus(expression, i);
+            ErrorHandler::validateUnaryOperation(expression, i);
 
             tokens.push_back({TokenType::Number, "-" + extractNumber(expression, i), minusIndex});
+
+        } else if (c == '+' // Handle unary plus
+                   && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
+                       || (tokens.back().type != TokenType::Number
+                           && tokens.back().type != TokenType::RightParen))) {
+
+            std::size_t plusIndex = i;
+            ++i;
+            ErrorHandler::validateUnaryOperation(expression, i);
+
+            tokens.push_back({TokenType::Number, "+" + extractNumber(expression, i), plusIndex});
+
+        } else if (c == 'D' // Handle random number token (unary operator 'D')
+                   && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
+                       || (tokens.back().type != TokenType::Number
+                           && tokens.back().type != TokenType::RightParen))) {
+            ++i;
+            tokens.push_back({TokenType::Number, std::to_string(static_cast<long double>(rand()) % extractNumber(expression, i)), i});
 
         } else if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') { // Handle normal numbers
             std::size_t numberIndex = i;
@@ -90,11 +108,23 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
                 case '/':
                     tokens.push_back({TokenType::Divide, "/", i});
                     break;
+                case '%':
+                    tokens.push_back({TokenType::Mod, "%", i});
+                    break;
+                case '^':
+                    tokens.push_back({TokenType::Exponentiate, "^", i});
+                    break;
                 case '(':
                     tokens.push_back({TokenType::LeftParen, "(", i});
                     break;
                 case ')':
                     tokens.push_back({TokenType::RightParen, ")", i});
+                    break;
+                case 'e':
+                    tokens.push_back({TokenType::Number, "2.71828182845904523", i});
+                    break;
+                case 'π':
+                    tokens.push_back({TokenType::Number, "3.14159265358979323", i});
                     break;
                 default:
                     ErrorHandler::validateCharacter(c, i);

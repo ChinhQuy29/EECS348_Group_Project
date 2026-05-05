@@ -75,14 +75,14 @@ void ErrorHandler::validateExpression(std::string_view expression) {
 }
 
 // Used in tokenizer
-void ErrorHandler::validateUnaryMinus(std::string_view expression,
+void ErrorHandler::validateUnaryOperation(std::string_view expression,
   std::size_t nextIndex) {
   if (nextIndex >= expression.size() ||
     (!std::isdigit(static_cast<unsigned char>(expression[nextIndex])) &&
       expression[nextIndex] != '.')) {
     throw CalculatorException(
       ErrorType::InvalidNumber,
-      "expected digits after unary minus",
+      "expected digits after unary operation",
       nextIndex + 1);
   }
 }

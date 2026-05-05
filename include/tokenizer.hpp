@@ -9,6 +9,8 @@ enum class TokenType {
     Minus,
     Multiply,
     Divide,
+    Modulo,
+    Exponentiate,
     LeftParen,
     RightParen
 };

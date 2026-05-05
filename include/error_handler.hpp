@@ -39,7 +39,7 @@ private:
 class ErrorHandler {
 public:
     static void validateExpression(std::string_view expression);
-    static void validateUnaryMinus(std::string_view expression, std::size_t nextIndex);
+    static void validateUnaryOperation(std::string_view expression, std::size_t nextIndex);
     static void validateDecimalPoint(bool hasDecimalPoint, std::size_t index);
     static void validateCompletedNumber(std::string_view number, std::size_t index);
     static void validateCharacter(char character, std::size_t index);
