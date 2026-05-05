@@ -5,6 +5,7 @@
 
 enum class TokenType {
     Number,
+    RandomMax,
     Plus,
     Minus,
     Multiply,

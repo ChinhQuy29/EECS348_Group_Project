@@ -83,16 +83,14 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
 
             tokens.push_back({TokenType::Number, "+" + extractNumber(expression, i), plusIndex});
 
-        } else if (c == 'D' // Handle random number token (unary operator 'D')
+        } else if (c == 'D' // Handle random integer token (unary operator 'D')
                    && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
                        || (tokens.back().type != TokenType::Number
                            && tokens.back().type != TokenType::RightParen))) {
             std::size_t randomTokenIndex = i;
             ++i;
             ErrorHandler::validateUnaryOperation(expression, i);
-            std::string maxValueString = extractNumber(expression, i);
-            long long maxValue = std::stoll(maxValueString);
-            tokens.push_back({TokenType::Number, std::to_string(rand() % maxValue), randomTokenIndex});
+            tokens.push_back({TokenType::RandomMax, extractNumber(expression, i), i});
 
         } else if (std::isdigit(static_cast<unsigned char>(c)) || c == '.') { // Handle normal numbers
             std::size_t numberIndex = i;
