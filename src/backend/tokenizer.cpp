@@ -13,7 +13,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
         if (std::isspace(static_cast<unsigned char>(c))) {
             ++i;
             continue;
-        }
+        }   
 
         // Handle unary minus for negative numbers
         if (c == '-') {
@@ -112,7 +112,35 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
             tokens.push_back({TokenType::Number, number});
             continue;
         }
+        
+        // Handle constants: pi and e
+        if (std::isalpha(static_cast<unsigned char>(c))) {
+            std::string identifier;
+            std::size_t startPos = i;
 
+            while (i < expression.size() &&
+                std::isalpha(static_cast<unsigned char>(expression[i]))) {
+                identifier += expression[i];
+                ++i;
+            }
+
+            if (identifier == "pi") {
+                tokens.push_back({TokenType::Number, "3.141592653589793"});
+            }
+            else if (identifier == "e") {
+                tokens.push_back({TokenType::Number, "2.718281828459045"});
+            }
+            else {
+                throw CalculatorException(
+                    ErrorType::InvalidCharacter,
+                    "unknown identifier '" + identifier + "'",
+                    startPos + 1
+                );
+            }
+
+            continue;
+        }
+        
         switch (c) {
             case '+':
                 tokens.push_back({TokenType::Plus, "+"});
