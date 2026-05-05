@@ -1,0 +1,3 @@
+C:\Qt\Tools\CMake_64\bin\cmake.exe -E rm -f CMakeFiles\Complete348_Project.dir/objects.a
+C:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\Complete348_Project.dir/objects.a @CMakeFiles\Complete348_Project.dir\objects1.rsp
+C:\Qt\Tools\mingw1310_64\bin\g++.exe -g -mwindows -Wl,--whole-archive CMakeFiles\Complete348_Project.dir/objects.a -Wl,--no-whole-archive -o Complete348_Project.exe -Wl,--out-implib,libComplete348_Project.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Complete348_Project.dir\linkLibs.rsp
