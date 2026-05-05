@@ -24,85 +24,53 @@ are processed, the single remaining stack value is returned as the final result.
 */
 
 double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
-    std::stack<double> values; //Stack to hold intermediate values during evaluation
+    struct ValueToken {
+        long double value;
+        std::size_t index;
+    };
 
-    for (std::size_t i = 0; i < postfixTokens.size(); ++i) { //Iterate through each token in the postfix expression
+    std::stack<ValueToken> values; // Stack to hold intermediate values and indices during evaluation
+
+    for (std::size_t i = 0; i < postfixTokens.size(); ++i) { // Iterate through each token in the postfix expression
         const Token& token = postfixTokens[i];
 
-        //If the token is a number, convert it to a double and push it onto the stack
+        // If the token is a number, convert it to a double and push it onto the stack
         if (token.type == TokenType::Number) {
-            try {
-                values.push(std::stod(token.value));
-            } catch (...) { //If conversion fails, throw an exception with details about the error
-                throw CalculatorException( //Create a CalculatorException with the appropriate error type, message, and position
-                    ErrorType::InvalidNumber,
-                    "failed to convert token '" + token.value + "' to a number",
-                    i + 1
-                );
-            }
+                values.push({std::stold(token.value), token.index});
             continue;
         }
 
         //If there are fewer than 2 values on the stack when an operator is encountered,
         //throw an exception indicating that there are not enough operands for the operator
-        if (values.size() < 2) { 
-            throw CalculatorException(
-                ErrorType::InvalidExpression,
-                "not enough operands for operator '" + token.value + "'",
-                i + 1
-            );
-        }
+        ErrorHandler::validatePostfixOperandCount(values.size(), token);
 
         //Pop the top two values from the stack to use as operands for the operator
-        double right = values.top();
+        ValueToken right = values.top();
         values.pop();
-
-        //Pop the next value from the stack to use as the left operand for the operator
-        double left = values.top();
+        ValueToken left = values.top();
         values.pop();
 
         //Perform the appropriate operation based on the type of operator token and push the result back onto the stack
         switch (token.type) {
             case TokenType::Plus:
-                values.push(left + right);
+                values.push({left.value + right.value, right.index});
                 break;
 
             case TokenType::Minus:
-                values.push(left - right);
+                values.push({left.value - right.value, right.index});
                 break;
 
             case TokenType::Multiply:
-                values.push(left * right);
+                values.push({left.value * right.value, right.index});
                 break;
 
             case TokenType::Divide:
-                if (right == 0.0) {
-                    throw CalculatorException(
-                        ErrorType::DivisionByZero,
-                        "cannot divide by zero",
-                        i + 1
-                    );
-                }
-                values.push(left / right);
+                ErrorHandler::validateDivisionByZero(right.value, right.index);
+                values.push({left.value / right.value, right.index});
                 break;
-
-            // If the token is an operator that is not recognized, throw an exception indicating that an unexpected token was encountered during evaluation
-            default:
-                throw CalculatorException(
-                    ErrorType::Evaluation,
-                    "unexpected token '" + token.value + "' during evaluation",
-                    i + 1
-                );
+            // No default case needed, leftPeren and RightParen never appear in postfixTokens
         }
     }
-    //After processing all tokens, there should be exactly one value left on the stack, which is the final result of the expression. 
-    //If there are more than one value left, it means the expression was not valid and an exception is thrown.
-    if (values.size() != 1) {
-        throw CalculatorException(
-            ErrorType::InvalidExpression,
-            "expression could not be fully evaluated"
-        );
-    }
 
-    return values.top();
+    return values.top().value;
 }
