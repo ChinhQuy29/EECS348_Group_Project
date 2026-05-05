@@ -1,0 +1,84 @@
+
+
+/*
+This is a UI file (.ui.qml) that is intended to be edited in Qt Design Studio only.
+It is supposed to be strictly declarative and only uses a subset of QML. If you edit
+this file manually, you might introduce QML code that is not supported by Qt Design Studio.
+Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on .ui.qml files.
+*/
+import QtQuick
+import QtQuick.Controls
+import UntitledProject
+
+Rectangle {
+    id: rectangle
+    width: Constants.width
+    height: Constants.height
+
+    color: Constants.backgroundColor
+
+    Rectangle {
+        id: rectangle1
+        x: 614
+        y: 105
+        width: 692
+        height: 871
+        color: "#ffffff"
+
+        Button {
+            id: button
+            x: 285
+            y: 479
+            width: 142
+            height: 60
+            text: qsTr("Back")
+            anchors.verticalCenter: parent.verticalCenter
+            font.family: "Arial"
+            anchors.verticalCenterOffset: 395
+            anchors.horizontalCenterOffset: -195
+            checkable: true
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Connections {
+                target: button
+                onClicked: animation.start()
+            }
+        }
+
+        Button {
+            id: button2
+            x: 483
+            y: 788
+            width: 142
+            height: 60
+            text: qsTr("Clear")
+            anchors.verticalCenter: parent.verticalCenter
+            Connections {
+                target: button2
+                function onClicked() {
+                    animation.start()
+                }
+            }
+            checkable: true
+            anchors.verticalCenterOffset: 395
+            anchors.horizontalCenterOffset: 203
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Text {
+            id: text1
+            x: 8
+            y: 8
+            width: 676
+            height: 787
+            text: qsTr("Text")
+            font.pixelSize: 12
+        }
+    }
+    states: [
+        State {
+            name: "clicked"
+            when: button.checked
+        }
+    ]
+}
