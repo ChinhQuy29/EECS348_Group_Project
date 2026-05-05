@@ -2,8 +2,10 @@
 #include "../../include/error_handler.hpp"
 
 #include <cmath>
+#include <ctime>
 #include <stack>
 #include <string>
+#include <random>
 
 /*
 Description: Evaluates a postfix (Reverse Polish Notation) expression and returns
@@ -32,18 +34,24 @@ double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const
 
     std::stack<ValueToken> values; // Stack to hold intermediate values and indices during evaluation
 
-    for (std::size_t i = 0; i < postfixTokens.size(); ++i) { // Iterate through each token in the postfix expression
-        const Token& token = postfixTokens[i];
+    for (std::size_t i = 0; i < postfixTokens.size(); ++i) { // Iterate through each currentToken in the postfix expression
+        const Token& currentToken = postfixTokens[i];
 
-        // If the token is a number, convert it to a double and push it onto the stack
-        if (token.type == TokenType::Number) {
-                values.push({std::stold(token.value), token.index});
+        // If the currentToken is a number, convert it to a double and push it onto the stack
+        if (currentToken.type == TokenType::Number) {
+            values.push({std::stold(currentToken.value), currentToken.index});
+            continue;
+        }
+        if (currentToken.type == TokenType::RandomMax) {
+            std::default_random_engine generator(static_cast<unsigned int>(std::time(nullptr)));
+            std::uniform_int_distribution<int> distribution(1, std::stoi(currentToken.value));
+            values.push({static_cast<long double>(distribution(generator)), currentToken.index});
             continue;
         }
 
         //If there are fewer than 2 values on the stack when an operator is encountered,
         //throw an exception indicating that there are not enough operands for the operator
-        ErrorHandler::validatePostfixOperandCount(values.size(), token);
+        ErrorHandler::validatePostfixOperandCount(values.size(), currentToken);
 
         //Pop the top two values from the stack to use as operands for the operator
         ValueToken right = values.top();
@@ -51,8 +59,8 @@ double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const
         ValueToken left = values.top();
         values.pop();
 
-        //Perform the appropriate operation based on the type of operator token and push the result back onto the stack
-        switch (token.type) {
+        //Perform the appropriate operation based on the type of operator currentToken and push the result back onto the stack
+        switch (currentToken.type) {
             case TokenType::Plus:
                 values.push({left.value + right.value, right.index});
                 break;

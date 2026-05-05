@@ -64,7 +64,7 @@ int Parser::precedence(TokenType type) const {
 }
 
 bool Parser::isOperator(TokenType type) const {
-    // Not Number, LeftParen, nor RightParen
+    // Not Number, RandomMax, LeftParen, nor RightParen
     return type == TokenType::Plus ||
            type == TokenType::Minus ||
            type == TokenType::Multiply ||
@@ -82,7 +82,7 @@ std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) cons
     for (std::size_t i = 0; i < infixTokens.size(); ++i) {
         const Token& token = infixTokens[i];
 
-        if (token.type == TokenType::Number) {
+        if (token.type == TokenType::Number || token.type == TokenType::RandomMax) {
             ErrorHandler::validateOperatorExistence(infixTokens, i);
             postfixTokens.push_back(token);
         } else if (isOperator(token.type)) {
