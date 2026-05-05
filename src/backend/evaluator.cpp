@@ -4,6 +4,25 @@
 #include <stack>
 #include <string>
 
+/*
+Description: Evaluates a postfix (Reverse Polish Notation) expression and returns
+its numeric result. Handles the four basic arithmetic operations and division-by-zero
+detection.
+
+Input: A std::vector<Token> representing a valid postfix expression. Each Token has
+a type (Number, Plus, Minus, Multiply, Divide) and a string value. Number tokens
+must be convertible to double. The vector is assumed to be ordered in postfix sequence.
+
+Output: A double representing the computed result of the expression. Throws a
+CalculatorException (ErrorType::InvalidNumber, InvalidExpression, DivisionByZero,
+or Evaluation) if the input is malformed or an illegal operation is attempted.
+
+Algorithm: Iterates through each token using an operand stack. Number tokens are
+converted to double and pushed onto the stack. For each operator token, two operands
+are popped, the operation is applied, and the result is pushed back. After all tokens
+are processed, the single remaining stack value is returned as the final result.
+*/
+
 double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
     struct ValueToken {
         long double value;
@@ -21,6 +40,8 @@ double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const
             continue;
         }
 
+        //If there are fewer than 2 values on the stack when an operator is encountered,
+        //throw an exception indicating that there are not enough operands for the operator
         ErrorHandler::validatePostfixOperandCount(values.size(), token);
 
         //Pop the top two values from the stack to use as operands for the operator
