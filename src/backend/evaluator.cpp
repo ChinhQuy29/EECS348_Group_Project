@@ -1,6 +1,7 @@
 #include "../../include/evaluator.hpp"
 #include "../../include/error_handler.hpp"
 
+#include <cmath>
 #include <stack>
 #include <string>
 
@@ -68,7 +69,16 @@ double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const
                 ErrorHandler::validateDivisionByZero(right.value, right.index);
                 values.push({left.value / right.value, right.index});
                 break;
-            // No default case needed, leftPeren and RightParen never appear in postfixTokens
+
+            case TokenType::Mod:
+                ErrorHandler::validateDivisionByZero(right.value, right.index);
+                values.push({static_cast<long double>(std::fmod(left.value, right.value)), right.index});
+                break;
+
+            case TokenType::Exponentiate:
+                values.push({static_cast<long double>(std::pow(left.value, right.value)), right.index});
+                break;
+            // No default case needed, LeftParen and RightParen never appear in postfixTokens
         }
     }
 

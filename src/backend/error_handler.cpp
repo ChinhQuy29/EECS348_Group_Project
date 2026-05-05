@@ -123,7 +123,7 @@ void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, s
   if (tokenIndex > 0) {
     TokenType previousType = tokens[tokenIndex - 1].type;
 
-    // if not Plus, Minus, Multiply, Divide, nor LeftParen
+    // if previous is Number or RightParen
     if (previousType == TokenType::Number || previousType == TokenType::RightParen) {
       throw CalculatorException(
         ErrorType::Syntax,
@@ -152,7 +152,7 @@ void ErrorHandler::validateOperatorPlacement(const std::vector<Token>& tokens,
 
   TokenType previousType = tokens[tokenIndex - 1].type;
 
-  // if is Plus, Minus, Multiply, Divide, or LeftParen
+  // if previous is not Number and not RightParen
   if (previousType != TokenType::Number && previousType != TokenType::RightParen) {
     throw CalculatorException(
       ErrorType::Syntax,

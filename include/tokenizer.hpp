@@ -9,7 +9,7 @@ enum class TokenType {
     Minus,
     Multiply,
     Divide,
-    Modulo,
+    Mod,
     Exponentiate,
     LeftParen,
     RightParen

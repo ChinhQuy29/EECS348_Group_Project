@@ -54,7 +54,10 @@ int Parser::precedence(TokenType type) const {
             return 1;
         case TokenType::Multiply:
         case TokenType::Divide:
+        case TokenType::Mod:
             return 2;
+        case TokenType::Exponentiate:
+            return 3;
         default:
             return 0;
     }
@@ -65,7 +68,9 @@ bool Parser::isOperator(TokenType type) const {
     return type == TokenType::Plus ||
            type == TokenType::Minus ||
            type == TokenType::Multiply ||
-           type == TokenType::Divide;
+           type == TokenType::Divide ||
+           type == TokenType::Mod ||
+           type == TokenType::Exponentiate;
 }
 
 std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) const {
