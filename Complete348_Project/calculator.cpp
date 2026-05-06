@@ -32,11 +32,11 @@ Calculator::Calculator(QWidget *parent)
     QString buttons[7][5] = {
         {QString(""),        QString("d2"),  QString("d4"),  QString("d6"),  QString("d8")},
         {QString(u'π'),      QString("d10"), QString("d12"), QString("d20"), QString("d100")},
-        {QString('e'),       QString('('),   QString(')'),   QString('^'),   QString(u'÷')},
-        {QString(""),        QString('7'),   QString('8'),   QString('9'),   QString('*')},
-        {QString("History"), QString('4'),   QString('5'),   QString('6'),   QString('-')},
-        {QString("Delete"),  QString('1'),   QString('2'),   QString('3'),   QString('+')},
-        {QString("Clear"),   QString('0'),   QString('.'),   QString('='),   QString("")}
+        {QString('e'),       QString(""),    QString('('),   QString(')'),   QString('^')},
+        {QString(""),        QString('7'),   QString('8'),   QString('9'),   QString(u'÷')},
+        {QString("History"), QString('4'),   QString('5'),   QString('6'),   QString(u'×')},
+        {QString("Delete"),  QString('1'),   QString('2'),   QString('3'),   QString('-')},
+        {QString("Clear"),   QString('0'),   QString('.'),   QString('='),   QString('+')}
     };
 
     for(int r = 0; r < 7; r++){
@@ -60,7 +60,7 @@ Calculator::Calculator(QWidget *parent)
             grid->addWidget(btn, r+1, c);
 
             // Connections
-            if(text[0].isDigit() || text == QString('.') || text == QString('+') || text == QString('-') || text == QString('*') || text == QString(u'÷') || text == QString('^') || text == QString(u'π') || text == QString('e') || text == QString('(') || text == QString(')'))
+            if(text[0].isDigit() || text == QString('.') || text == QString('+') || text == QString('-') || text == QString(u'×') || text == QString(u'÷') || text == QString('^') || text == QString(u'π') || text == QString('e') || text == QString('(') || text == QString(')'))
                 connect(btn,&QPushButton::clicked,this,&Calculator::literalClicked);
             else if(text == QString('='))
                 connect(btn,&QPushButton::clicked,this,&Calculator::equalsClicked);
@@ -87,6 +87,8 @@ std::string qstos(QString qs) {
             ret += 'p';
         } else if (c == QChar(u'÷')) {
             ret += '/';
+        } else if (c == QChar(u'×')) {
+            ret += '*';
         } else if (u'①' <= c && c <= u'Ⓝ') {
             ret += 'D' + std::to_string(c.unicode() - (u'①' - 1));
         } else {

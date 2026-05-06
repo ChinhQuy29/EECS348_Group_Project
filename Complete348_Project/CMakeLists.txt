@@ -12,13 +12,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
-set(TS_FILES Complete348_Project_en_US.ts)
-
 set(PROJECT_SOURCES
         main.cpp
         calculator.cpp
         calculator.hpp
-        calculator.ui
+        error_handler.cpp
+        error_handler.hpp
+        evaluator.cpp
+        evaluator.hpp
+        history_manager.cpp
+        history_manager.hpp
+        parser.cpp
+        parser.hpp
+        tokenizer.cpp
+        tokenizer.hpp
+
         ${TS_FILES}
 )
 
@@ -26,7 +34,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Complete348_Project
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        error_handler.cpp error_handler.hpp evaluator.cpp evaluator.hpp history_manager.cpp history_manager.hpp main.cpp parser.cpp parser.hpp tokenizer.cpp tokenizer.hpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Complete348_Project APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

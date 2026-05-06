@@ -51,7 +51,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 26,
+				"line" : 34,
 				"parent" : 0
 			},
 			{
@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 70,
+				"line" : 77,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 53,
+				"line" : 60,
 				"parent" : 0
 			},
 			{
@@ -379,11 +379,11 @@
 				0,
 				1,
 				2,
+				4,
 				6,
 				8,
 				10,
-				12,
-				14
+				12
 			]
 		}
 	],
@@ -507,11 +507,11 @@
 				0,
 				1,
 				2,
+				4,
 				6,
 				8,
 				10,
-				12,
-				14
+				12
 			]
 		},
 		{
@@ -519,34 +519,25 @@
 			"sourceIndexes" : 
 			[
 				3,
+				5,
 				7,
 				9,
 				11,
-				13,
-				15,
-				16
-			]
-		},
-		{
-			"name" : "Forms",
-			"sourceIndexes" : 
-			[
-				4
+				13
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				5,
-				17
+				14
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				18
+				15
 			]
 		}
 	],
@@ -573,18 +564,8 @@
 		},
 		{
 			"backtrace" : 4,
-			"path" : "calculator.h",
+			"path" : "calculator.hpp",
 			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 4,
-			"path" : "calculator.ui",
-			"sourceGroupIndex" : 2
-		},
-		{
-			"backtrace" : 4,
-			"path" : "Complete348_Project_en_US.ts",
-			"sourceGroupIndex" : 3
 		},
 		{
 			"backtrace" : 4,
@@ -644,20 +625,14 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/include/ui_calculator.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/timestamp",
-			"sourceGroupIndex" : 3
+			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/timestamp.rule",
-			"sourceGroupIndex" : 4
+			"sourceGroupIndex" : 3
 		}
 	],
 	"type" : "EXECUTABLE"

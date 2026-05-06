@@ -1,3 +1,47 @@
+/*
+Description:
+Implements the Parser class, which converts a mathematical expression
+from infix notation to postfix notation using a stack-based algorithm.
+The parser ensures correct operator precedence and validates syntax,
+including proper operator placement and matching parentheses.
+
+Input:
+- infixTokens (std::vector<Token>): list of tokens representing the expression
+
+Tokens may include:
+- Numbers
+- Operators (+, -, *, /)
+- Parentheses ( ( and ) )
+
+Output:
+- Returns a std::vector<Token> representing the postfix expression
+- Throws errors for invalid syntax or mismatched parentheses
+
+Constraints:
+- Token list must not be empty
+- Operators cannot appear at the beginning or end
+- Operators cannot follow another operator or '('
+- Parentheses must be properly matched
+
+Algorithm:
+1. Check if token list is empty -> throws error if true
+
+2. Iterate through each token:
+   - If number -> add to output
+   - If operator:
+       - Validate placement
+       - Pop operators from stack based on precedence
+       - Push current operator to stack
+   - If '(' -> push to stack
+   - If ')' -> pop until matching '('
+
+3. After iteration:
+   - Pop remaining operators to output
+   - Throw error if unmatched parentheses remain
+
+4. Return postfix token list
+*/
+
 #include "parser.hpp"
 #include "error_handler.hpp"
 
@@ -10,101 +54,74 @@ int Parser::precedence(TokenType type) const {
             return 1;
         case TokenType::Multiply:
         case TokenType::Divide:
+        case TokenType::Mod:
             return 2;
+        case TokenType::Exponentiate:
+            return 3;
         default:
             return 0;
     }
 }
 
 bool Parser::isOperator(TokenType type) const {
+    // Not Number, RandomMax, LeftParen, nor RightParen
     return type == TokenType::Plus ||
            type == TokenType::Minus ||
            type == TokenType::Multiply ||
-           type == TokenType::Divide;
+           type == TokenType::Divide ||
+           type == TokenType::Mod ||
+           type == TokenType::Exponentiate;
 }
 
 std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) const {
-    if (infixTokens.empty()) {
-        throw CalculatorException(
-            ErrorType::EmptyExpression,
-            "no tokens were produced from the input"
-        );
-    }
-
-    std::vector<Token> output;
+    std::vector<Token> postfixTokens;
     std::stack<Token> operators;
+    std::stack<std::size_t> leftParenIndices; // Stack to track indices of left parentheses for error reporting
 
+    // for each token in the infix expression
     for (std::size_t i = 0; i < infixTokens.size(); ++i) {
         const Token& token = infixTokens[i];
 
-        if (token.type == TokenType::Number) {
-            output.push_back(token);
+        if (token.type == TokenType::Number || token.type == TokenType::RandomMax) {
+            ErrorHandler::validateOperatorExistence(infixTokens, i);
+            postfixTokens.push_back(token);
         } else if (isOperator(token.type)) {
-            // basic syntax check: operator cannot be first or last
-            if (i == 0 || i == infixTokens.size() - 1) {
-                throw CalculatorException(
-                    ErrorType::Syntax,
-                    "operator cannot appear at the beginning or end of the expression",
-                    i + 1
-                );
-            }
-
-            // previous token cannot be another operator or left paren
-            TokenType prevType = infixTokens[i - 1].type;
-            if (isOperator(prevType) || prevType == TokenType::LeftParen) {
-                throw CalculatorException(
-                    ErrorType::Syntax,
-                    "unexpected operator placement",
-                    i + 1
-                );
-            }
+            ErrorHandler::validateOperatorPlacement(infixTokens, i);
 
             while (!operators.empty() &&
                    isOperator(operators.top().type) &&
                    precedence(operators.top().type) >= precedence(token.type)) {
-                output.push_back(operators.top());
+                postfixTokens.push_back(operators.top());
                 operators.pop();
             }
 
             operators.push(token);
-        } else if (token.type == TokenType::LeftParen) {
+        }
+        else if (token.type == TokenType::LeftParen) {
+            ErrorHandler::validateOperatorExistence(infixTokens, i);
             operators.push(token);
+            leftParenIndices.push(token.index);
         } else if (token.type == TokenType::RightParen) {
-            bool foundLeftParen = false;
-
-            while (!operators.empty()) {
-                if (operators.top().type == TokenType::LeftParen) {
-                    foundLeftParen = true;
-                    operators.pop();
-                    break;
-                }
-
-                output.push_back(operators.top());
+            ErrorHandler::validateClosingParenthesis(operators, token.index);
+            
+            // while inside the parentheses, move operators to output
+            while (operators.top().type != TokenType::LeftParen) {
+                postfixTokens.push_back(operators.top());
                 operators.pop();
             }
 
-            if (!foundLeftParen) {
-                throw CalculatorException(
-                    ErrorType::MismatchedParentheses,
-                    "closing parenthesis does not have a matching opening parenthesis",
-                    i + 1
-                );
-            }
+            // Pop the left parenthesis
+            operators.pop();
+            leftParenIndices.pop();
         }
     }
 
-    while (!operators.empty()) {
-        if (operators.top().type == TokenType::LeftParen ||
-            operators.top().type == TokenType::RightParen) {
-            throw CalculatorException(
-                ErrorType::MismatchedParentheses,
-                "opening parenthesis does not have a matching closing parenthesis"
-            );
-        }
+    ErrorHandler::validateOpeningParenthesis(leftParenIndices);
 
-        output.push_back(operators.top());
+    while (!operators.empty()) {
+        postfixTokens.push_back(operators.top());
         operators.pop();
     }
 
-    return output;
+    return postfixTokens;
 }

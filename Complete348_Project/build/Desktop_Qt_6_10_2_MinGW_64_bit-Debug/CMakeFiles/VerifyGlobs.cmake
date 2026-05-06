@@ -46,8 +46,6 @@ set(OLD_GLOB
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/EWIEGA46WW/moc_calculator.cpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.cpp"
-  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_engine.cpp"
-  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_frontend.cpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.cpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.cpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.cpp"
@@ -101,7 +99,6 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.hpp")
 set(OLD_GLOB
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.hpp"
-  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_engine.hpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.hpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.hpp"
   "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.hpp"
@@ -180,7 +177,6 @@ endif()
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.ui")
 set(OLD_GLOB
-  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.ui"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
