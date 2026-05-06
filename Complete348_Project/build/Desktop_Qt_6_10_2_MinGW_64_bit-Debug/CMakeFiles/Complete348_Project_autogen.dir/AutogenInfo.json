@@ -1,20 +1,19 @@
 {
 	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
-	"BUILD_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project",
+	"BUILD_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen",
+	"CMAKE_BINARY_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project",
 	"CMAKE_EXECUTABLE" : "C:/Qt/Tools/CMake_64/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : 
 	[
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/CMakeLists.txt",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtcreator/cmake-helper/qtcreator-project.cmake",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtcreator/cmake-helper/package-manager.cmake",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtcreator/cmake-helper/maintenance_tool_provider.cmake",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/CMakeLists.txt",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake",
@@ -27,7 +26,7 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake",
-		"C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
+		"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeRCInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
@@ -329,29 +328,58 @@
 		"C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project",
+	"CMAKE_SOURCE_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project",
 	"CROSS_CONFIG" : false,
-	"DEP_FILE" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/deps",
+	"DEP_FILE" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "Complete348_Project_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.h",
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.hpp",
 			"MU",
 			"EWIEGA46WW/moc_calculator.cpp",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.hpp",
+			"MU",
+			"EWIEGA46WW/moc_error_handler.cpp",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.hpp",
+			"MU",
+			"EWIEGA46WW/moc_evaluator.cpp",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.hpp",
+			"MU",
+			"EWIEGA46WW/moc_history_manager.cpp",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/parser.hpp",
+			"MU",
+			"EWIEGA46WW/moc_parser.cpp",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/tokenizer.hpp",
+			"MU",
+			"EWIEGA46WW/moc_tokenizer.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/include",
-	"MOC_COMPILATION_FILE" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/include",
+	"MOC_COMPILATION_FILE" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NEEDS_QMAIN",
-		"QT_QML_DEBUG",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -401,26 +429,51 @@
 		"-c",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 14,
-	"PARSE_CACHE_FILE" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Complete348_Project_autogen.dir/ParseCache.txt",
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Complete348_Project_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt/6.10.2/mingw_64/bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "C:/Qt/6.10.2/mingw_64/bin/uic.exe",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 10,
-	"SETTINGS_FILE" : "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Complete348_Project_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Complete348_Project_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.cpp",
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.cpp",
 			"MU",
 			null
 		],
 		[
-			"C:/Users/hampt/OneDrive/Documents/Complete348_Project/main.cpp",
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/main.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/parser.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/tokenizer.cpp",
 			"MU",
 			null
 		]

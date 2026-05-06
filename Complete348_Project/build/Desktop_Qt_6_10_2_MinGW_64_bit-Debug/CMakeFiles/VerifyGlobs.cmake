@@ -3,171 +3,186 @@
 cmake_policy(SET CMP0009 NEW)
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.c")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.c")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.c++")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.c++")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.cc")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.cc")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.ch")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.ch")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.cpp")
 set(OLD_GLOB
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp"
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/EWIEGA46WW/moc_calculator.cpp"
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp"
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.cpp"
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/main.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/CMakeFiles/4.3.2/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/EWIEGA46WW/moc_calculator.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_engine.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_frontend.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/main.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/parser.cpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/tokenizer.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.cxx")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.cxx")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.h")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.h")
 set(OLD_GLOB
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h"
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.h"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.h++")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.h++")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.hh")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.hh")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.hpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.hpp")
 set(OLD_GLOB
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator_engine.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/error_handler.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/evaluator.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/history_manager.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/parser.hpp"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/tokenizer.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.hxx")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.hxx")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.java")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.java")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.js")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.js")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.jui")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.jui")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.qml")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.qml")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.qrc")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.qrc")
 set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.qs")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.qs")
 set(OLD_GLOB
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.qs"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # _directory_contents at C:/Qt/6.10.2/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hampt/OneDrive/Documents/Complete348_Project/*.ui")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/*.ui")
 set(OLD_GLOB
-  "C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.ui"
+  "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.ui"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs")
 endif()

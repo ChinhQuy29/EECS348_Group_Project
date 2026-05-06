@@ -1,13 +1,21 @@
-#include "calculator.h"
+#include "calculator.hpp"
+#include "tokenizer.hpp"
+#include "parser.hpp"
+#include "evaluator.hpp"
+#include "history_manager.hpp"
+
 #include <QGridLayout>
 #include <QPushButton>
-#include <QRandomGenerator>
-#include <cmath>
+
+Tokenizer tokenizer;
+Parser parser;
+Evaluator evaluator;
+HistoryManager historyManager;
 
 Calculator::Calculator(QWidget *parent)
     : QWidget(parent), storedValue(0)
 {
-    display = new QLineEdit("0");
+    display = new QLineEdit("");
     display->setAlignment(Qt::AlignRight);
     display->setFixedHeight(50);
     display->setStyleSheet("font-size: 20px;");
@@ -22,17 +30,17 @@ Calculator::Calculator(QWidget *parent)
     grid->addWidget(history, 0, 5, 8, 1);
 
     QString buttons[7][5] = {
-        {"", "d2","d4","d6","d8"},
-        {"pi","d10","d12","d20","d100"},
-        {"e","","(",")","/"},
-        {"","7","8","9","*"},
-        {"hstry","4","5","6","-"},
-        {"del","1","2","3","+"},
-        {"clr","0",".","=",""}
+        {QString(""),        QString("d2"),  QString("d4"),  QString("d6"),  QString("d8")},
+        {QString(u'π'),      QString("d10"), QString("d12"), QString("d20"), QString("d100")},
+        {QString('e'),       QString('('),   QString(')'),   QString('^'),   QString(u'÷')},
+        {QString(""),        QString('7'),   QString('8'),   QString('9'),   QString('*')},
+        {QString("History"), QString('4'),   QString('5'),   QString('6'),   QString('-')},
+        {QString("Delete"),  QString('1'),   QString('2'),   QString('3'),   QString('+')},
+        {QString("Clear"),   QString('0'),   QString('.'),   QString('='),   QString("")}
     };
 
-    for(int r=0;r<7;r++){
-        for(int c=0;c<5;c++){
+    for(int r = 0; r < 7; r++){
+        for(int c = 0; c < 5; c++){
             QString text = buttons[r][c];
             if(text == "") continue;
 
@@ -40,11 +48,11 @@ Calculator::Calculator(QWidget *parent)
             btn->setFixedSize(60,40);
 
             // Colors
-            if(text.startsWith("d"))
+            if(text[0] == 'd')
                 btn->setStyleSheet("background:#f2d388;");
             else if(text[0].isDigit())
                 btn->setStyleSheet("background:#a8c3a0;");
-            else if(text=="clr" || text=="del" || text=="hstry")
+            else if(text == QString("Clear") || text == QString("Delete") || text == QString("History"))
                 btn->setStyleSheet("background:#e07a7a;");
             else
                 btn->setStyleSheet("background:#b0c4d4;");
@@ -52,20 +60,18 @@ Calculator::Calculator(QWidget *parent)
             grid->addWidget(btn, r+1, c);
 
             // Connections
-            if(text[0].isDigit() || text==".")
-                connect(btn,&QPushButton::clicked,this,&Calculator::digitClicked);
-            else if(text=="+"||text=="-"||text=="*"||text=="/")
-                connect(btn,&QPushButton::clicked,this,&Calculator::operatorClicked);
-            else if(text=="=")
+            if(text[0].isDigit() || text == QString('.') || text == QString('+') || text == QString('-') || text == QString('*') || text == QString(u'÷') || text == QString('^') || text == QString(u'π') || text == QString('e') || text == QString('(') || text == QString(')'))
+                connect(btn,&QPushButton::clicked,this,&Calculator::literalClicked);
+            else if(text == QString('='))
                 connect(btn,&QPushButton::clicked,this,&Calculator::equalsClicked);
-            else if(text=="clr")
-                connect(btn,&QPushButton::clicked,this,&Calculator::clearClicked);
-            else if(text=="del")
-                connect(btn,&QPushButton::clicked,this,&Calculator::deleteClicked);
-            else if(text=="pi" || text=="e")
-                connect(btn,&QPushButton::clicked,this,&Calculator::constantClicked);
-            else if(text.startsWith("d"))
+            else if(text[0] == QChar('d'))
                 connect(btn,&QPushButton::clicked,this,&Calculator::diceClicked);
+            else if(text == QString("History"))
+                connect(btn,&QPushButton::clicked,this,&Calculator::historyClicked);
+            else if(text == QString("Delete"))
+                connect(btn,&QPushButton::clicked,this,&Calculator::deleteClicked);
+            else if(text == QString("Clear"))
+                connect(btn,&QPushButton::clicked,this,&Calculator::clearClicked);
         }
     }
 
@@ -73,70 +79,66 @@ Calculator::Calculator(QWidget *parent)
     setWindowTitle("Dice Calculator");
 }
 
-// -------- Logic --------
-
-void Calculator::digitClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if(display->text()=="0")
-        display->setText(btn->text());
-    else
-        display->setText(display->text()+btn->text());
+std::string qstos(QString qs) {
+    std::string ret;
+    for (qsizetype i = 0; i < qs.length(); ++i) {
+        QChar c = qs[i];
+        if (c == QChar(u'π')) {
+            ret += 'p';
+        } else if (c == QChar(u'÷')) {
+            ret += '/';
+        } else if (u'①' <= c && c <= u'Ⓝ') {
+            ret += 'D' + std::to_string(c.unicode() - (u'①' - 1));
+        } else {
+            ret += c.unicode();
+        }
+    }
+    return ret;
 }
 
-void Calculator::operatorClicked(){
+// -------- Logic --------
+
+void Calculator::literalClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    storedValue = display->text().toDouble();
-    pendingOp = btn->text();
-    display->clear();
+    display->setText(display->text()+btn->text());
 }
 
 void Calculator::equalsClicked(){
-    double value = display->text().toDouble();
-    double result = 0;
+    const QString qExpression = display->text();
+    std::string expression = qstos(qExpression);
+    std::vector<Token> tokens = tokenizer.tokenize(expression);
+    std::vector<Token> postfix = parser.toPostfix(tokens);
+    const long double result = evaluator.evaluatePostfix(postfix);
 
-    if(pendingOp=="+") result = storedValue + value;
-    if(pendingOp=="-") result = storedValue - value;
-    if(pendingOp=="*") result = storedValue * value;
-    if(pendingOp=="/") result = storedValue / value;
+    QString qEquation = QString("%1 = %2")
+                        .arg(qExpression).arg(result);
 
-    QString entry = QString("%1 %2 %3 = %4")
-                        .arg(storedValue).arg(pendingOp).arg(value).arg(result);
-
-    addToHistory(entry);
-    display->setText(QString::number(result));
+    addToHistory(qEquation);
+    display->setText(QString::number(double(result)));
 }
 
-void Calculator::clearClicked(){
-    display->setText("0");
+void Calculator::historyClicked(){
+
 }
 
 void Calculator::deleteClicked(){
     QString t = display->text();
-    t.chop(1);
-    if(t.isEmpty()) t="0";
+
+    if(!t.isEmpty()) {
+        t.chop(1);
+    }
     display->setText(t);
 }
 
-void Calculator::constantClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if(btn->text()=="pi")
-        display->setText(QString::number(M_PI));
-    else if(btn->text()=="e")
-        display->setText(QString::number(M_E));
-}
-
-int Calculator::rollDice(int sides){
-    return QRandomGenerator::global()->bounded(1, sides+1);
+void Calculator::clearClicked(){
+    display->setText("");
 }
 
 void Calculator::diceClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int sides = btn->text().mid(1).toInt();
 
-    int result = rollDice(sides);
-    display->setText(QString::number(result));
-
-    addToHistory(QString("d%1 → %2").arg(sides).arg(result));
+    display->setText(display->text()+QChar(u'①' - 1 + sides));
 }
 
 void Calculator::addToHistory(const QString &entry){

@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'calculator.h'
+** Meta object code from reading C++ file 'calculator.hpp'
 **
 ** Created by: The Qt Meta Object Compiler version 69 (Qt 6.10.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../calculator.h"
+#include "../../../../calculator.hpp"
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
@@ -17,7 +17,7 @@
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'calculator.h' doesn't include <QObject>."
+#error "The header file 'calculator.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
 #error "This file was generated using the moc from 6.10.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -40,31 +40,28 @@ template <> constexpr inline auto Calculator::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Calculator",
-        "digitClicked",
+        "literalClicked",
         "",
-        "operatorClicked",
         "equalsClicked",
-        "clearClicked",
+        "historyClicked",
         "deleteClicked",
-        "constantClicked",
+        "clearClicked",
         "diceClicked"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'digitClicked'
+        // Slot 'literalClicked'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'operatorClicked'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'equalsClicked'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'historyClicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'clearClicked'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'deleteClicked'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'clearClicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'constantClicked'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'diceClicked'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -88,13 +85,12 @@ void Calculator::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<Calculator *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->digitClicked(); break;
-        case 1: _t->operatorClicked(); break;
-        case 2: _t->equalsClicked(); break;
-        case 3: _t->clearClicked(); break;
-        case 4: _t->deleteClicked(); break;
-        case 5: _t->constantClicked(); break;
-        case 6: _t->diceClicked(); break;
+        case 0: _t->literalClicked(); break;
+        case 1: _t->equalsClicked(); break;
+        case 2: _t->historyClicked(); break;
+        case 3: _t->deleteClicked(); break;
+        case 4: _t->clearClicked(); break;
+        case 5: _t->diceClicked(); break;
         default: ;
         }
     }
@@ -120,14 +116,14 @@ int Calculator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 6;
     }
     return _id;
 }

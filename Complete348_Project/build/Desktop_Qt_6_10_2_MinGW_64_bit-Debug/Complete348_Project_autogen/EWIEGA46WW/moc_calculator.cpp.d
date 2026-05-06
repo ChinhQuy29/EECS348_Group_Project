@@ -1,5 +1,5 @@
-C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/EWIEGA46WW/moc_calculator.cpp: C:/Users/hampt/OneDrive/Documents/Complete348_Project/calculator.h \
-  C:/Users/hampt/OneDrive/Documents/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h \
+E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/EWIEGA46WW/moc_calculator.cpp: E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/calculator.hpp \
+  E:/Documents/KU/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/moc_predefs.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20iterator.h \
