@@ -1,0 +1,21 @@
+# ninja log v6
+11	781	7998177110634669	Complete348_Project_autogen/timestamp	f54c54c83f09203e
+11	781	7998177110634669	Complete348_Project_autogen/mocs_compilation.cpp	f54c54c83f09203e
+11	781	7998177110634669	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Release/Complete348_Project_autogen/timestamp	f54c54c83f09203e
+11	781	7998177110634669	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Release/Complete348_Project_autogen/mocs_compilation.cpp	f54c54c83f09203e
+819	1787	7998177111937913	CMakeFiles/Complete348_Project.dir/tokenizer.cpp.obj	ec3db4d3d7e47df8
+802	1804	7998177111759501	CMakeFiles/Complete348_Project.dir/error_handler.cpp.obj	ec5be9156afaef06
+810	1858	7998177111840235	CMakeFiles/Complete348_Project.dir/history_manager.cpp.obj	de33c632985f4a9a
+805	1969	7998177111791373	CMakeFiles/Complete348_Project.dir/evaluator.cpp.obj	bff7af38c6449bb7
+815	1995	7998177111893848	CMakeFiles/Complete348_Project.dir/parser.cpp.obj	ccabd64a15188d6e
+788	3210	7998177111623335	CMakeFiles/Complete348_Project.dir/Complete348_Project_autogen/mocs_compilation.cpp.obj	e154adc23ed584b2
+792	3269	7998177111665050	CMakeFiles/Complete348_Project.dir/main.cpp.obj	37d950ba9dcdaabc
+797	3607	7998177111714861	CMakeFiles/Complete348_Project.dir/calculator.cpp.obj	1e21c0330f9a5b42
+3607	3832	7998177139821706	Complete348_Project.exe	4e841fb78d9aa3ec
+36	232	7998199317294505	Complete348_Project_autogen/timestamp	f54c54c83f09203e
+36	232	7998199317294505	Complete348_Project_autogen/mocs_compilation.cpp	f54c54c83f09203e
+36	232	7998199317294505	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Release/Complete348_Project_autogen/timestamp	f54c54c83f09203e
+36	232	7998199317294505	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Release/Complete348_Project_autogen/mocs_compilation.cpp	f54c54c83f09203e
+238	1506	7998199319310412	CMakeFiles/Complete348_Project.dir/evaluator.cpp.obj	bff7af38c6449bb7
+234	2595	7998199319279974	CMakeFiles/Complete348_Project.dir/calculator.cpp.obj	1e21c0330f9a5b42
+2596	2869	7998199342890010	Complete348_Project.exe	4e841fb78d9aa3ec
