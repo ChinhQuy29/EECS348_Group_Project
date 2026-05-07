@@ -14,8 +14,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
 set(PROJECT_SOURCES
         main.cpp
-        calculator.cpp
-        calculator.hpp
+        front_end.cpp
+        front_end.hpp
         error_handler.cpp
         error_handler.hpp
         evaluator.cpp

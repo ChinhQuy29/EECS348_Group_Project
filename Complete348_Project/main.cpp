@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "calculator.hpp"
+#include "front_end.hpp"
 
 int main(int argc, char *argv[])
 {
