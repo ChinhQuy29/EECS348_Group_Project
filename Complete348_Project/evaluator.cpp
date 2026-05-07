@@ -34,7 +34,7 @@ unsigned int Evaluator::makeSeed() const {
     return static_cast<unsigned int>(time ^ static_cast<decltype(time)>(threadID));
 }
 
-double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
+long double Evaluator::evaluatePostfix(const std::vector<Token>& postfixTokens) const {
     struct ValueToken {
         long double value;
         std::size_t index;

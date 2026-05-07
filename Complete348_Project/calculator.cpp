@@ -3,6 +3,7 @@
 #include "parser.hpp"
 #include "evaluator.hpp"
 #include "history_manager.hpp"
+#include "error_handler.hpp"
 
 #include <QGridLayout>
 #include <QPushButton>
@@ -107,16 +108,20 @@ void Calculator::literalClicked(){
 
 void Calculator::equalsClicked(){
     const QString qExpression = display->text();
-    std::string expression = qstos(qExpression);
-    std::vector<Token> tokens = tokenizer.tokenize(expression);
-    std::vector<Token> postfix = parser.toPostfix(tokens);
-    const long double result = evaluator.evaluatePostfix(postfix);
+    const std::string expression = qstos(qExpression);
+    try {
+        const std::vector<Token> tokens = tokenizer.tokenize(expression);
+        const std::vector<Token> postfix = parser.toPostfix(tokens);
+        const long double result = evaluator.evaluatePostfix(postfix);
 
-    QString qEquation = QString("%1 = %2")
-                        .arg(qExpression).arg(result);
+        QString qEquation = QString("%1 = %2").arg(qExpression).arg(result);
 
-    addToHistory(qEquation);
-    display->setText(QString::number(double(result)));
+        addToHistory(qEquation);
+        display->setText(QString::number(double(result)));
+    } catch (const CalculatorException& e) {
+        display->setText(e.what());
+    }
+
 }
 
 void Calculator::historyClicked(){

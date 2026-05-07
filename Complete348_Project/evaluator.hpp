@@ -5,7 +5,7 @@
 
 class Evaluator {
 public:
-    double evaluatePostfix(const std::vector<Token>& postfixTokens) const;
+    long double evaluatePostfix(const std::vector<Token>& postfixTokens) const;
 private:
     unsigned int makeSeed() const;
 };
