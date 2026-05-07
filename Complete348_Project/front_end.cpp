@@ -108,18 +108,30 @@ void Calculator::literalClicked(){
 
 void Calculator::equalsClicked(){
     const QString qExpression = display->text();
+    if (qExpression.isEmpty()) return;
+
     const std::string expression = qstos(qExpression);
+
     try {
         const std::vector<Token> tokens = tokenizer.tokenize(expression);
         const std::vector<Token> postfix = parser.toPostfix(tokens);
         const long double result = evaluator.evaluatePostfix(postfix);
 
-        QString qEquation = QString("%1 = %2").arg(qExpression).arg(result);
+        QString qEquation = QString("%1 = %2").arg(qExpression).arg((double)result);
 
+        historyManager.addEntry(qEquation);
         addToHistory(qEquation);
+
         display->setText(QString::number(double(result)));
+
     } catch (const CalculatorException& e) {
-        display->setText(e.what());
+        QString emphasizedError = QString("<b style='color:red;'>Error: %1</b> <i style='color:gray;'>(%2)</i>").arg(e.what()).arg(qExpression);
+
+        historyManager.addError(emphasizedError);
+
+        addToHistory(emphasizedError);
+
+        display->setText("Error");
     }
 
 }

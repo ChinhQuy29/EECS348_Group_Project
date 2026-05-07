@@ -47,6 +47,8 @@ Algorithm:
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <QString>
+#include <QList>
 
 // Constructor that initializes the history manager with a filename for storing history
 HistoryManager::HistoryManager(const std::string& filename)
@@ -66,6 +68,15 @@ void HistoryManager::saveCalculation(const std::string& expression, const std::s
         << " = "
         << result
         << '\n';
+}
+
+void HistoryManager::addEntry(const QString &entry) {
+    sessionHistory.append(entry);
+}
+
+void HistoryManager::addError(const QString &error) {
+    // You can treat errors the same as entries or handle them differently
+    sessionHistory.append(error);
 }
 
 // Returns the last 'count' calculations from the history file
