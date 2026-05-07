@@ -92,6 +92,15 @@
 			<key>requirement</key>
 			<string>cdhash H"56ddcb20b830406a1ecd204d5c2d3f2b518f7480" or cdhash H"abca393c53163367cc4c8aad4992db4008cd2da5"</string>
 		</dict>
+		<key>PlugIns/imageformats/libqsvg.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			etridE9U7g/YNnHSv0jGtmO3sf8=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"7adae2744f54ee0fd83671d2bf48c6b663b7b1ff" or cdhash H"1c4553e8388a6f4544e30f126e885cd536d7859f"</string>
+		</dict>
 		<key>PlugIns/platforms/libqcocoa.dylib</key>
 		<dict>
 			<key>cdhash</key>
