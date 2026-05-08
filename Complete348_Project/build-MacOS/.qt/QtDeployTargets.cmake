@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_Complete348_Project_FILE /Users/eian/EECS348_Group_Project/Complete348_Project/build-release/Complete348_Project.app/Contents/MacOS/Complete348_Project)
-set(__QT_DEPLOY_TARGET_Complete348_Project_TYPE EXECUTABLE)
