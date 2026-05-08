@@ -5,30 +5,34 @@
 #include "history_manager.hpp"
 #include "error_handler.hpp"
 
+#include <QWidget>
+#include <QStackedWidget>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QSizePolicy>
 
 Tokenizer tokenizer;
 Parser parser;
 Evaluator evaluator;
 HistoryManager historyManager;
 
+// ----------------------- Calculator page -----------------------
 Calculator::Calculator(QWidget *parent)
-    : QWidget(parent), storedValue(0)
+    : QWidget(parent)
 {
     display = new QLineEdit("");
     display->setAlignment(Qt::AlignRight);
     display->setFixedHeight(50);
     display->setStyleSheet("font-size: 20px;");
 
-    history = new QTextEdit();
-    history->setReadOnly(true);
-    history->setFixedWidth(150);
+    sessionHistory = new QTextEdit();
+    sessionHistory->setReadOnly(true);
+    sessionHistory->setFixedWidth(150);
 
     QGridLayout *grid = new QGridLayout;
 
     grid->addWidget(display, 0, 0, 1, 5);
-    grid->addWidget(history, 0, 5, 8, 1);
+    grid->addWidget(sessionHistory, 0, 5, 8, 1);
 
     QString buttons[7][5] = {
         {QString(""),        QString("d2"),  QString("d4"),  QString("d6"),  QString("d8")},
@@ -77,7 +81,7 @@ Calculator::Calculator(QWidget *parent)
     }
 
     setLayout(grid);
-    setWindowTitle("Dice Calculator");
+    setWindowTitle("CalcTTRPG - Calculator");
 }
 
 std::string qstos(QString qs) {
@@ -119,15 +123,16 @@ void Calculator::equalsClicked(){
 
         QString qEquation = QString("%1 = %2").arg(qExpression).arg((double)result);
 
-        historyManager.addEntry(qEquation);
         addToHistory(qEquation);
 
         display->setText(QString::number(double(result)));
 
     } catch (const CalculatorException& e) {
-        QString emphasizedError = QString("<b style='color:red;'>Error: %1</b> <i style='color:gray;'>(%2)</i>").arg(e.what()).arg(qExpression);
-
-        historyManager.addError(emphasizedError);
+        const QStringView before = QStringView(qExpression).first(e.getPosition()-1);
+        const QString middle = QString("<b style='color:red;'>%1</b>").arg(qExpression[e.getPosition()-1]);
+        const QStringView after = QStringView(qExpression).sliced(e.getPosition());
+        const QStringView newExpression = before + middle + after;
+        const QString emphasizedError = QString("%1 <i style='color:gray;'>%2</i>").arg(newExpression).arg(e.what());
 
         addToHistory(emphasizedError);
 
@@ -137,7 +142,14 @@ void Calculator::equalsClicked(){
 }
 
 void Calculator::historyClicked(){
+    QStackedWidget* window = qobject_cast<QStackedWidget*>(parentWidget());
+    if (!window) return;
 
+    if (auto *history = qobject_cast<History*>(window->widget(1))) {
+        history->reloadHistory();
+    }
+
+    window->setCurrentIndex(1);
 }
 
 void Calculator::deleteClicked(){
@@ -155,11 +167,80 @@ void Calculator::clearClicked(){
 
 void Calculator::diceClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int sides = btn->text().mid(1).toInt();
+    int sides = btn->text().sliced(1).toInt();
 
     display->setText(display->text()+QChar(u'①' - 1 + sides));
 }
 
 void Calculator::addToHistory(const QString &entry){
-    history->append(entry);
+    sessionHistory->append(entry);
+    historyManager.saveCalculation(entry.toStdString());
+}
+
+// ----------------------- History page -----------------------
+History::History(QWidget *parent)
+    : QWidget(parent)
+{
+    historyDisplay = new QTextEdit();
+    historyDisplay->setReadOnly(true);
+    historyDisplay->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QGridLayout *grid = new QGridLayout;
+
+    grid->addWidget(historyDisplay, 0, 1, 8, 8);
+    grid->setColumnStretch(0, 0);
+    grid->setColumnStretch(1, 1);
+    reloadHistory();
+
+    QString buttons[7] = {
+        QString(""),
+        QString(""),
+        QString(""),
+        QString(""),
+        QString("Return"),
+        QString(""),
+        QString("Clear")
+    };
+
+    for(int r = 0; r < 7; r++){
+        QString text = buttons[r];
+        if(text == "") continue;
+
+        QPushButton *btn = new QPushButton(text);
+        btn->setFixedSize(60,40);
+
+        // Color
+        btn->setStyleSheet("background:#e07a7a;");
+
+        grid->addWidget(btn, r+1, 0);
+
+        // Connections
+        if(text == QString("Return"))
+            connect(btn,&QPushButton::clicked,this,&History::returnClicked);
+        else if(text == QString("Clear"))
+            connect(btn,&QPushButton::clicked,this,&History::clearClicked);
+    }
+
+    setLayout(grid);
+    setWindowTitle("CalcTTRPG - History");
+}
+
+void History::clearClicked(){
+    historyManager.clearHistory();
+    historyDisplay->clear();
+}
+
+void History::reloadHistory(){
+    const std::vector<std::string> calculations = historyManager.getCalculations();
+    QString data;
+    for (const std::string& entry : calculations) {
+        data += QString::fromStdString(entry);
+        data += '\n';
+    }
+    historyDisplay->setText(data);
+}
+
+void History::returnClicked(){
+    QStackedWidget* window = qobject_cast<QStackedWidget*>(parentWidget());
+    window->setCurrentIndex(0);
 }

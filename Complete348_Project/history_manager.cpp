@@ -56,7 +56,7 @@ HistoryManager::HistoryManager(const std::string& filename)
 }
 
 // Adds a new calculation (including all details) to the history file
-void HistoryManager::saveCalculation(const std::string& expression, const std::string& result) {
+void HistoryManager::saveCalculation(const std::string& input) {
     // Open the history file in append mode to avoid overwriting existing ones
     std::ofstream outFile(filename, std::ios::app);
     ErrorHandler::validateHistoryStream(static_cast<bool>(outFile));
@@ -64,23 +64,12 @@ void HistoryManager::saveCalculation(const std::string& expression, const std::s
     // Formatted entry: [timestamp] | expression = result
     outFile << getCurrentTimestamp()
         << " | "
-        << expression
-        << " = "
-        << result
+        << input
         << '\n';
 }
 
-void HistoryManager::addEntry(const QString &entry) {
-    sessionHistory.append(entry);
-}
-
-void HistoryManager::addError(const QString &error) {
-    // You can treat errors the same as entries or handle them differently
-    sessionHistory.append(error);
-}
-
 // Returns the last 'count' calculations from the history file
-std::vector<std::string> HistoryManager::getLastCalculations(std::size_t count) const {
+std::vector<std::string> HistoryManager::getCalculations() const {
     // Opens the history file for reading
     std::ifstream inFile(filename);
 
@@ -100,13 +89,7 @@ std::vector<std::string> HistoryManager::getLastCalculations(std::size_t count) 
         }
     }
 
-    // If total lines are less than or equal to requested count, return all lines
-    if (allLines.size() <= count) {
-        return allLines;
-    }
-
-    // Otherwise, return only the last 'count' lines
-    return std::vector<std::string>(allLines.end() - count, allLines.end());
+    return allLines;
 }
 
 // Clears the entire history by opening the file in truncation mode

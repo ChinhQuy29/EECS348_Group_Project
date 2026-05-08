@@ -1,0 +1,27 @@
+# ninja log v6
+11	980	7999147967436199	Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+11	980	7999147967436199	Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+11	980	7999147967436199	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+11	980	7999147967436199	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+1032	1818	7999147969167644	CMakeFiles/Complete348_Project.dir/tokenizer.cpp.obj	fce398663732e7e1
+1009	1898	7999147968935353	CMakeFiles/Complete348_Project.dir/error_handler.cpp.obj	56c8592355a2c279
+1027	2059	7999147969107802	CMakeFiles/Complete348_Project.dir/parser.cpp.obj	59c567d47c1d6b03
+1015	2407	7999147968996106	CMakeFiles/Complete348_Project.dir/evaluator.cpp.obj	f5010a435fedd9f
+1020	3453	7999147969047963	CMakeFiles/Complete348_Project.dir/history_manager.cpp.obj	d2e14616ac5edc3b
+995	4106	7999147968788916	CMakeFiles/Complete348_Project.dir/Complete348_Project_autogen/mocs_compilation.cpp.obj	7a2603726bdfa613
+999	4185	7999147968843976	CMakeFiles/Complete348_Project.dir/main.cpp.obj	2c6fc7d67b3623b9
+1004	4400	7999147968893718	CMakeFiles/Complete348_Project.dir/front_end.cpp.obj	fb7d5d732449f3f3
+4400	4829	7999148002841181	Complete348_Project.exe	f3c1b9d5d891b158
+35	229	7999148854863082	Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+35	229	7999148854863082	Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+35	229	7999148854863082	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+35	229	7999148854863082	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+230	2604	7999148856819284	CMakeFiles/Complete348_Project.dir/main.cpp.obj	2c6fc7d67b3623b9
+2604	2996	7999148880559570	Complete348_Project.exe	f3c1b9d5d891b158
+34	209	7999150445349743	Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+34	209	7999150445349743	Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+34	209	7999150445349743	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/timestamp	fa3402bc561fc15b
+34	209	7999150445349743	C:/Users/idjth/Documents/Visual_Studio/EECS348_Group_Project/Complete348_Project/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Complete348_Project_autogen/mocs_compilation.cpp	fa3402bc561fc15b
+210	2582	7999150447099015	CMakeFiles/Complete348_Project.dir/main.cpp.obj	2c6fc7d67b3623b9
+214	2778	7999150447135957	CMakeFiles/Complete348_Project.dir/front_end.cpp.obj	fb7d5d732449f3f3
+2778	3203	7999150472789628	Complete348_Project.exe	f3c1b9d5d891b158

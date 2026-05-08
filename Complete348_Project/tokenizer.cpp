@@ -64,7 +64,8 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
         } else if (c == '-' // Handle unary minus
                    && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
                        || (tokens.back().type != TokenType::Number
-                           && tokens.back().type != TokenType::RightParen))) {
+                           && tokens.back().type != TokenType::RightParen
+                           && tokens.back().type != TokenType::RandomMax))) {
 
             std::size_t minusIndex = i;
             ++i;
@@ -75,7 +76,8 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
         } else if (c == '+' // Handle unary plus
                    && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
                        || (tokens.back().type != TokenType::Number
-                           && tokens.back().type != TokenType::RightParen))) {
+                           && tokens.back().type != TokenType::RightParen
+                           && tokens.back().type != TokenType::RandomMax))) {
 
             std::size_t plusIndex = i;
             ++i;
@@ -83,10 +85,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& expression) const {
 
             tokens.push_back({TokenType::Number, "+" + extractNumber(expression, i), plusIndex});
 
-        } else if (c == 'D' // Handle random integer token (unary operator 'D')
-                   && (tokens.empty() // if first token or preceded by plus, minus, multiply, divide, or left parenthesis
-                       || (tokens.back().type != TokenType::Number
-                           && tokens.back().type != TokenType::RightParen))) {
+        } else if (c == 'D') { // Handle random integer token (unary operator 'D')
             std::size_t randomTokenIndex = i;
             ++i;
             ErrorHandler::validateUnaryOperation(expression, i);

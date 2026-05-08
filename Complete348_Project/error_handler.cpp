@@ -124,7 +124,7 @@ void ErrorHandler::validateOperatorExistence(const std::vector<Token>& tokens, s
     TokenType previousType = tokens[tokenIndex - 1].type;
 
     // if previous is Number or RightParen
-    if (previousType == TokenType::Number || previousType == TokenType::RightParen) {
+    if (previousType == TokenType::Number || previousType == TokenType::RandomMax || previousType == TokenType::RightParen) {
       throw CalculatorException(
         ErrorType::Syntax,
         "tokens must be separated by operators",

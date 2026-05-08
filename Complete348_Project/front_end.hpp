@@ -14,13 +14,9 @@ public:
 
 private:
     QLineEdit *display;
-    QTextEdit *history;
-
-    double storedValue;
-    QString pendingOp;
+    QTextEdit *sessionHistory;
 
     void addToHistory(const QString &entry);
-    int rollDice(int sides);
 
 private slots:
     void literalClicked();
@@ -29,6 +25,22 @@ private slots:
     void deleteClicked();
     void clearClicked();
     void diceClicked();
+};
+
+class History : public QWidget
+{
+    Q_OBJECT
+
+public:
+    History(QWidget *parent = nullptr);
+    void reloadHistory();
+
+private:
+    QTextEdit *historyDisplay;
+
+private slots:
+    void returnClicked();
+    void clearClicked();
 };
 
 #endif
