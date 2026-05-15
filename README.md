@@ -20,30 +20,27 @@
 -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![project_license][license-shield]][license-url]
 
 
 
-<!-- PROJECT LOGO -->
+<!-- PROJECT HEADER -->
 <br />
 <div align="center">
-  <a href="https://github.com/ChinhQuy29/EECS348_Group_Project">
-    <!--<img src="images/logo.png" alt="Logo" width="80" height="80"> -->
-  </a>
+  <a href="https://github.com/ChinhQuy29/EECS348_Group_Project"></a>
 
-<h3 align="center">Calculatorz</h3>
+  <h3 align="center">©Calculatorz, 2026</h3>
 
   <p align="center">
-    Tokenizer of arthimetic using C++
+    Arithmetic Expression Evaluator in C++
     <br />
-    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/tree/main/doc"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project">View Demo</a>
-    &middot;
     <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
+    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/issues/new?labels=enhancement&template=feature-request---.md">Report Bug</a>
   </p>
 </div>
 
@@ -62,16 +59,14 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#installation from .zip">Installation from .zip</a></li>
+        <li><a href="#compilation from source">Compilation from Source</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -80,18 +75,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!--[![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
-The project is able to interpret and tokenize a given input from the user to parse and evaluate versatile arthmetic operations using C++. The program should be able to interpret the precedence of operations and proper grouping of input.
-
+This is a Qt-based calculator designed for use during tabletop role-playing games. The UI provides any input the user may need, converts the input into tokens, parses infix to postfix, and evaluates the result (including random values given by dice). It validates syntax and numbers, reports errors with position info, and highlights errors in the session history. Calculations are stored with timestamps in a history file, and the app has both a session history, and persistant history view to browse or clear past entries.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
-* [![C++] [C++] [C++-url]] 
-* [![QT] [QT] [QT-url]]
+[![C++][C++-shield]][C++-url]
+[![QT][QT-shield]][QT-url]
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -99,52 +92,56 @@ The project is able to interpret and tokenize a given input from the user to par
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Download the Latest Build
-1. Head over to the [**Releases**](../../releases) page
-2. Under the latest release, expand the **Assets** section
-3. Download the binary for your platform:
-   - `arithmetic-evaluator-windows.exe` — Windows
-   - `arithmetic-evaluator-macos` — macOS
-4. Run the executable from your terminal or command prompt
+This software was designed to be completely self-contained and has no prerequisite software dependencies.
+
+### Installation from .zip
+
+1. Head over to the .zip file associated with your operating system inside the github repository.
+* [![Windows][Windows-shield]][Windows-url]
+* [![macOS][macOS-shield]][macOS-url]
+<!-- * [![Linux][Linux-shield]][Linux-url] -->
+
+2. Select "Download raw file" and successfully download the zipped folder.
+3. Use your prefered decompressing method (7zip, WinRAR, or native decompression).
+4. Finally, run the executable from your terminal or user interface to confirm the instalation.
 
 > **Note:** On macOS, you may need to make the binary executable first:
 > ```bash
-> chmod +x arithmetic-evaluator-macos
+> chmod +x CalcTTRPG
 > ```
 
 ---
 
-### Building from Source
+### Compilation from Source
 
-If you'd prefer to compile it yourself, see the [Building from Source](#building-from-source) section below.
+If you'd prefer to compile it yourself, or your operating system has no associated .zip file, you can compile the program yourself.
 
----
+#### Prerequisites
 
-## Building from Source
+- A downloaded version of Git Bash
+- An account and licence with the Qt software
+_With an email address issued by a higher educational institution, a Qt Educational Licence can be obtained for free through their website.
+- A downloaded version of Qt Creator compatible with Qt6
+- A C++ compiler (GCC or Clang) compatible with C++17
+- The relevent ___deployqt program for your operating system
 
-### Prerequisites
-- C++17 or later
-- A C++ compiler (GCC, Clang, or MSVC)
+#### Steps
 
-### Steps
+1. Clone our repository, so you have a local version of the source code.
 ```bash
 git clone https://github.com/ChinhQuy29/EECS348_Group_Project.git
-cd your-repo
-
-****
-NEEDS WORK
-****
-
 ```
-
----
+2. Launch Qt Creator and select "Open Project...", and use your file explorer to select the `CMakeLists.txt` in the cloned `EECS348_Group_Project/CalcTTRPG-Uncompiled` directory.
+3. Deselect the default "Debug" kit, and configure the project as a "Release" kit.
+4. Build the project using the UI. Qt should parse the information in the CMake file and build using the specified versions.
+At this point you should have the compiled executable and be able to run the program from the Qt Creator UI.
+To make the program functional independent of Qt Creator:
+5. Separate your generated executable file into it's own directory, then run the relavent ___deployqt program on the executable to generate all the required library files.
+Congratulations! You now have your own version of the program.
+_If you have performed these steps because there is no associated .zip file in the repository yet, feel free to contribute to improving this repo by zipping a version of the directory and sending it through GitHub to us with information about your operating system (See Contributing section for more information). Then we can add your .zip to the main branch and others can benifit from your contribution.
 
 ## Usage
-```bash
-./arithmetic-evaluator "3 + (4 * 2)"
-```
-
----
+Press buttons, and form expressions! Try things out and see what happens. This calculator was designed to be very user-friendly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -153,12 +150,12 @@ NEEDS WORK
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] User Interface Module
-- [ ] Tokenizer
-- [ ] Prioritzation Module
-- [ ] Radomization Module
-- [ ] Evaluation Module
-- [ ] Error Handler
+- [x] Tokenizer Module
+- [x] Parser Module
+- [x] Evaluator Module
+- [x] History Manager Module
+- [x] Error Handler Module
+- [x] User Interface Module
 
 See the [open issues](https://github.com/ChinhQuy29/EECS348_Group_Project/issues) for a full list of proposed features (and known issues).
 
@@ -180,20 +177,11 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Top contributors:
 
 <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ChinhQuy29/EECS348_Group_Project" alt="contrib.rocks image" />
 </a>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the project_license. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -202,20 +190,14 @@ Distributed under the project_license. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Calculatorz - e971h440@ku.edu - q595t095@home.ku.edu - c094m918@ku.edu - c754h654@ku.edu -i804j427@ku.edu
+©Calculatorz, 2026
+Chase - c754h654@ku.edu
+Courtney - c094m918@ku.edu
+Eian - e971h440@ku.edu
+Isaiah - i804j427@ku.edu
+Jason - q595t095@home.ku.edu
 
 Project Link: [https://github.com/ChinhQuy29/EECS348_Group_Project](https://github.com/ChinhQuy29/EECS348_Group_Project)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -231,28 +213,15 @@ Project Link: [https://github.com/ChinhQuy29/EECS348_Group_Project](https://gith
 [stars-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ChinhQuy29/EECS348_Group_Project.svg?style=for-the-badge
 [issues-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/issues
-[license-shield]: https://img.shields.io/github/license/ChinhQuy29/EECS348_Group_Project.svg?style=for-the-badge
-[license-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[product-screenshot]: images/screenshot.png
+
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com
-[C++]:https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white
+[C++-shield]: https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B
 [C++-url]: https://cplusplus.com
-[Qt]: https://img.shields.io/badge/Qt-%23217346.svg?style=for-the-badge&logo=qt
+[Qt-shield]: https://img.shields.io/badge/Qt-%23217346.svg?style=for-the-badge&logo=qt
 [Qt-url]: https://www.qt.io
+[Windows-shield]: https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11
+[Windows-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/tree/main/CalcTTRPG-Windows11.zip
+[macOS-shield]: https://img.shields.io/badge/macOS-000000?logo=apple
+[macOS-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/tree/main/CalcTTRPG-macOS26.zip
+[Linux-shield]: https://img.shields.io/badge/Linux-FCC624?logo=linux
+[Linux-url]: https://github.com/ChinhQuy29/EECS348_Group_Project/tree/main/CalcTTRPG-LinuxDebian13.zip

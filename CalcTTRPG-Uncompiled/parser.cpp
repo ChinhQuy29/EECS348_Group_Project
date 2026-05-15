@@ -1,3 +1,8 @@
+#include "parser.hpp"
+#include "error_handler.hpp"
+
+#include <stack>
+
 /*
 Description:
 Implements the Parser class, which converts a mathematical expression
@@ -42,86 +47,78 @@ Algorithm:
 4. Return postfix token list
 */
 
-#include "parser.hpp"
-#include "error_handler.hpp"
-
-#include <stack>
-
 int Parser::precedence(TokenType type) const {
-    switch (type) {
-        case TokenType::Plus:
-        case TokenType::Minus:
-            return 1;
-        case TokenType::Multiply:
-        case TokenType::Divide:
-        case TokenType::Mod:
-            return 2;
-        case TokenType::Exponentiate:
-            return 3;
-        default:
-            return 0;
-    }
+  switch (type) {
+  case TokenType::Plus:
+  case TokenType::Minus:
+    return 1;
+  case TokenType::Multiply:
+  case TokenType::Divide:
+  case TokenType::Mod:
+    return 2;
+  case TokenType::Exponentiate:
+    return 3;
+  default:
+    return 0;
+  }
 }
 
 bool Parser::isOperator(TokenType type) const {
-    // Not Number, RandomMax, LeftParen, nor RightParen
-    return type == TokenType::Plus ||
-           type == TokenType::Minus ||
-           type == TokenType::Multiply ||
-           type == TokenType::Divide ||
-           type == TokenType::Mod ||
-           type == TokenType::Exponentiate;
+  // Not Number, RandomMax, LeftParen, nor RightParen
+  return type == TokenType::Plus || type == TokenType::Minus ||
+         type == TokenType::Multiply || type == TokenType::Divide ||
+         type == TokenType::Mod || type == TokenType::Exponentiate;
 }
 
-std::vector<Token> Parser::toPostfix(const std::vector<Token>& infixTokens) const {
-    std::vector<Token> postfixTokens;
-    std::stack<Token> operators;
-    std::stack<std::size_t> leftParenIndices; // Stack to track indices of left parentheses for error reporting
+std::vector<Token>
+Parser::toPostfix(const std::vector<Token> &infixTokens) const {
+  std::vector<Token> postfixTokens;
+  std::stack<Token> operators;
+  std::stack<std::size_t> leftParenIndices; // Stack to track indices of left
+                                            // parentheses for error reporting
 
-    // for each token in the infix expression
-    for (std::size_t i = 0; i < infixTokens.size(); ++i) {
-        const Token& token = infixTokens[i];
+  // for each token in the infix expression
+  for (std::size_t i = 0; i < infixTokens.size(); ++i) {
+    const Token &token = infixTokens[i];
 
-        if (token.type == TokenType::Number || token.type == TokenType::RandomMax) {
-            ErrorHandler::validateOperatorExistence(infixTokens, i);
-            postfixTokens.push_back(token);
-        } else if (isOperator(token.type)) {
-            ErrorHandler::validateOperatorPlacement(infixTokens, i);
+    if (token.type == TokenType::Number || token.type == TokenType::RandomMax) {
+      ErrorHandler::validateOperatorExistence(infixTokens, i);
+      postfixTokens.push_back(token);
+    } else if (isOperator(token.type)) {
+      ErrorHandler::validateOperatorPlacement(infixTokens, i);
 
-            while (!operators.empty() &&
-                   isOperator(operators.top().type) &&
-                   precedence(operators.top().type) >= precedence(token.type)) {
-                postfixTokens.push_back(operators.top());
-                operators.pop();
-            }
-
-            operators.push(token);
-        }
-        else if (token.type == TokenType::LeftParen) {
-            ErrorHandler::validateOperatorExistence(infixTokens, i);
-            operators.push(token);
-            leftParenIndices.push(token.index);
-        } else if (token.type == TokenType::RightParen) {
-            ErrorHandler::validateClosingParenthesis(operators, token.index);
-            
-            // while inside the parentheses, move operators to output
-            while (operators.top().type != TokenType::LeftParen) {
-                postfixTokens.push_back(operators.top());
-                operators.pop();
-            }
-
-            // Pop the left parenthesis
-            operators.pop();
-            leftParenIndices.pop();
-        }
-    }
-
-    ErrorHandler::validateOpeningParenthesis(leftParenIndices);
-
-    while (!operators.empty()) {
+      while (!operators.empty() && isOperator(operators.top().type) &&
+             precedence(operators.top().type) >= precedence(token.type)) {
         postfixTokens.push_back(operators.top());
         operators.pop();
-    }
+      }
 
-    return postfixTokens;
+      operators.push(token);
+    } else if (token.type == TokenType::LeftParen) {
+      ErrorHandler::validateOperatorExistence(infixTokens, i);
+      operators.push(token);
+      leftParenIndices.push(token.index);
+    } else if (token.type == TokenType::RightParen) {
+      ErrorHandler::validateClosingParenthesis(operators, token.index);
+
+      // while inside the parentheses, move operators to output
+      while (operators.top().type != TokenType::LeftParen) {
+        postfixTokens.push_back(operators.top());
+        operators.pop();
+      }
+
+      // Pop the left parenthesis
+      operators.pop();
+      leftParenIndices.pop();
+    }
+  }
+
+  ErrorHandler::validateOpeningParenthesis(leftParenIndices);
+
+  while (!operators.empty()) {
+    postfixTokens.push_back(operators.top());
+    operators.pop();
+  }
+
+  return postfixTokens;
 }

@@ -5,9 +5,9 @@
 
 class Parser {
 public:
-    std::vector<Token> toPostfix(const std::vector<Token>& infixTokens) const;
+  std::vector<Token> toPostfix(const std::vector<Token> &infixTokens) const;
 
 private:
-    int precedence(TokenType type) const;
-    bool isOperator(TokenType type) const;
+  int precedence(TokenType type) const;
+  bool isOperator(TokenType type) const;
 };
