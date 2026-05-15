@@ -103,11 +103,12 @@ This software was designed to be completely self-contained and has no prerequisi
 
 2. Select "Download raw file" and successfully download the zipped folder.
 3. Use your prefered decompressing method (7zip, WinRAR, or native decompression).
-4. Finally, run the executable from your terminal or user interface to confirm the instalation.
+4. Finally, run the executable from your terminal or user interface to confirm the installation.
 
 > **Note:** On macOS, you may need to make the binary executable first:
 > ```bash
 > chmod +x CalcTTRPG
+> sudo xattr -rd com.apple.quarantine /Applications/CalcTTRPG.app
 > ```
 
 ---
