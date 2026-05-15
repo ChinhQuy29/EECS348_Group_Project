@@ -40,7 +40,7 @@
     <br />
     <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
-    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/issues/new?labels=enhancement&template=feature-request---.md">Report Bug</a>
+    <a href="https://github.com/ChinhQuy29/EECS348_Group_Project/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -59,8 +59,8 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#installation from .zip">Installation from .zip</a></li>
-        <li><a href="#compilation from source">Compilation from Source</a></li>
+        <li><a href="#installation-from-zip">Installation from .zip</a></li>
+        <li><a href="#compilation-from-source">Compilation from Source</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -119,8 +119,8 @@ If you'd prefer to compile it yourself, or your operating system has no associat
 #### Prerequisites
 
 - A downloaded version of Git Bash
-- An account and licence with the Qt software
-_With an email address issued by a higher educational institution, a Qt Educational Licence can be obtained for free through their website.
+- An account and licence with the Qt software\
+_With an email address issued by a higher educational institution, a Qt Educational Licence can be obtained for free through their website._
 - A downloaded version of Qt Creator compatible with Qt6
 - A C++ compiler (GCC or Clang) compatible with C++17
 - The relevent ___deployqt program for your operating system
@@ -138,7 +138,8 @@ At this point you should have the compiled executable and be able to run the pro
 To make the program functional independent of Qt Creator:
 5. Separate your generated executable file into it's own directory, then run the relavent ___deployqt program on the executable to generate all the required library files.
 Congratulations! You now have your own version of the program.
-_If you have performed these steps because there is no associated .zip file in the repository yet, feel free to contribute to improving this repo by zipping a version of the directory and sending it through GitHub to us with information about your operating system (See Contributing section for more information). Then we can add your .zip to the main branch and others can benifit from your contribution.
+
+_If you have performed these steps because there is no associated .zip file in the repository yet, feel free to contribute to improving this repo by zipping a version of the directory and sending it through GitHub to us with information about your operating system (See Contributing section for more information). Then we can add your .zip to the main branch and others can benifit from your contribution._
 
 ## Usage
 Press buttons, and form expressions! Try things out and see what happens. This calculator was designed to be very user-friendly.
