@@ -1,0 +1,9 @@
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/CalcTTRPG.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/edit_cache.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/rebuild_cache.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/list_install_components.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/install.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/install/local.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/install/strip.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/CalcTTRPG_autogen_timestamp_deps.dir
+/Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CMakeFiles/CalcTTRPG_autogen.dir

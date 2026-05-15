@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_CalcTTRPG_FILE /Users/eian/EECS348_Group_Project/CalcTTRPG-Uncompiled/build/CalcTTRPG.app/Contents/MacOS/CalcTTRPG)
+set(__QT_DEPLOY_TARGET_CalcTTRPG_TYPE EXECUTABLE)
